@@ -27,7 +27,6 @@ export default function Button1({ children, className, onClick = () => {} }) {
   return (
     <button
       className={`relative overflow-hidden bg-blue-600 text-white px-6 py-2 rounded-md text-base hover:bg-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-400 focus:ring-opacity-75 ${className}`}
-      type="button"
       onClick={(e) => {
         onClick();
         handleRipple(e);

@@ -2,9 +2,12 @@ import { Link, NavLink } from "react-router";
 import Button1 from "./btns/Button1";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import useAuth from "../../hooks/useAuth";
+import LogoutUser from "../../pages/authentication/LogoutUser";
 
 function NavBar() {
   const [showToltip, setShowToltip] = useState(false);
+  const { user } = useAuth();
   return (
     <>
       <div className="min-h-full">
@@ -46,15 +49,9 @@ function NavBar() {
               </div>
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
-                  {false ? (
+                  {user ? (
                     <>
-                      <Button1
-                        className={
-                          " focus:ring-gray-400 hover:bg-gray-700/80 bg-gray-700/90"
-                        }
-                      >
-                        Logout
-                      </Button1>
+                      <LogoutUser />
                       {/* Profile dropdown */}
                       <div className="relative ml-3">
                         <details>
@@ -74,7 +71,7 @@ function NavBar() {
                             />
                             {showToltip && (
                               <motion.span className=" absolute z-20 top-7 right-5 bg-gray-800 text-white rounded-md p-2 text-nowrap">
-                                Jubayer Ahmed
+                                {user.displayName}
                               </motion.span>
                             )}
                           </summary>
@@ -259,18 +256,6 @@ function NavBar() {
             </div>
           </div>
         </nav>
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Dashboard
-            </h1>
-          </div>
-        </header>
-        <main>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            {/* Your content */}
-          </div>
-        </main>
       </div>
     </>
   );

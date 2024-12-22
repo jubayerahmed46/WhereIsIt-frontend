@@ -1,10 +1,56 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Button1 from "../../components/common/btns/Button1";
+import { useForm } from "react-hook-form";
+import ValidatePassword from "../../utils/ValidatePassword";
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import { updateProfile } from "firebase/auth";
 
 export default function Signup() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { register, handleSubmit, reset } = useForm();
+  const [passError, setPassError] = useState("");
+  const { signUpWithEmailAndPass } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmitData = (formData) => {
+    formData.password = formData.password.trim();
+
+    setPassError("");
+
+    const { fullname, email, password, photoURL } = formData;
+
+    if (ValidatePassword(password)) {
+      signUpWithEmailAndPass(email, password)
+        .then(({ user }) => {
+          return updateProfile(user, { displayName: fullname, photoURL });
+        })
+        .then(() => {
+          alert("logged");
+          reset();
+          navigate("/");
+          // catch (error) {
+          //   switch (error.code) {
+          //     case "auth/email-already-in-use":
+          //       alert("The email address is already in use.");
+          //       break;
+          //     case "auth/invalid-email":
+          //       alert("The email address is invalid.");
+          //       break;
+          //     case "auth/weak-password":
+          //       alert("The password is too weak.");
+          //       break;
+          //     default:
+          //       alert("An error occurred: " + error.message);
+          //   }
+          // }
+        });
+    } else {
+      setPassError(
+        "Password must contain at least one uppercase letter, one lowercase letter, one digit (0-9) and be 6 to 12 characters long without any whitespace."
+      );
+    }
   };
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -15,7 +61,7 @@ export default function Signup() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmitData)} className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -26,7 +72,7 @@ export default function Signup() {
               <div className="mt-2">
                 <input
                   id="name"
-                  name="fullname"
+                  {...register("fullname")}
                   type="text"
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -41,7 +87,7 @@ export default function Signup() {
               <div>
                 <input
                   id="email"
-                  name="email"
+                  {...register("email")}
                   type="email"
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -56,8 +102,8 @@ export default function Signup() {
               <div>
                 <input
                   id="photoURL"
-                  name="photoURL"
-                  type="text"
+                  {...register("photoURL")}
+                  type="url"
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
@@ -76,12 +122,13 @@ export default function Signup() {
               <div>
                 <input
                   id="password"
-                  name="password"
+                  {...register("password")}
                   type="password"
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
+              <p className="text-xs text-error mt-1">{passError} </p>
             </div>
 
             <div>
