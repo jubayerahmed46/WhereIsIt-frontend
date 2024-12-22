@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import Button1 from "./btns/Button1";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -46,7 +46,7 @@ function NavBar() {
               </div>
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
-                  {true ? (
+                  {false ? (
                     <>
                       <Button1
                         className={
@@ -129,7 +129,9 @@ function NavBar() {
                       </div>
                     </>
                   ) : (
-                    <Button1>Login</Button1>
+                    <Link to={"auth/login"}>
+                      <Button1>Login</Button1>
+                    </Link>
                   )}
                 </div>
               </div>

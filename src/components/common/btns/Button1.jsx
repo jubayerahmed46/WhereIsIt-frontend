@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./anim.css";
 
 // eslint-disable-next-line react/prop-types
-export default function Button2({ children, className, onClick = () => {} }) {
+export default function Button1({ children, className, onClick = () => {} }) {
   const [rippleStyle, setRippleStyle] = useState({});
 
   const handleRipple = (event) => {
