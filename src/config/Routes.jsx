@@ -7,6 +7,8 @@ import {
   Login,
   Signup,
   Home,
+  PrivetRoute,
+  AddItem,
 } from ".";
 
 function Router() {
@@ -16,6 +18,10 @@ function Router() {
         <Route path="/" element={<MainLayout />}>
           <Route path="/" index={true} element={<Home />} />
           <Route path="lost-and-found" element={<h2>posts</h2>} />
+          {/* Protected Route */}
+          <Route element={<PrivetRoute />}>
+            <Route path="add-item" element={<AddItem />}></Route>
+          </Route>
           <Route path="auth" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />

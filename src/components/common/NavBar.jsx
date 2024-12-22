@@ -94,7 +94,7 @@ function NavBar() {
                           >
                             <div className="w-[80%] flex-col flex mx-auto py-8">
                               <NavLink
-                                to={"/"}
+                                to={"add-item"}
                                 className={({ isActive }) =>
                                   `rounded-md ${
                                     isActive
@@ -103,10 +103,10 @@ function NavBar() {
                                   } px-3 py-2  text-sm font-medium `
                                 }
                               >
-                                Add Lost & Found Item
+                                Add Lost or Found Item
                               </NavLink>
                               <NavLink
-                                to={"lost&found"}
+                                to={"/d"}
                                 className={({ isActive }) =>
                                   `rounded-md ${
                                     isActive
@@ -118,7 +118,7 @@ function NavBar() {
                                 All Recovered Items
                               </NavLink>
                               <NavLink
-                                to={"all-recovered-items"}
+                                to={"/d"}
                                 className={({ isActive }) =>
                                   `rounded-md ${
                                     isActive
