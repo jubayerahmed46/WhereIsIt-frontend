@@ -4,10 +4,17 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import useAuth from "../../hooks/useAuth";
 import LogoutUser from "../../pages/authentication/LogoutUser";
+import ProfileImageValidate from "./ProfileImageValidate";
 
 function NavBar() {
   const [showToltip, setShowToltip] = useState(false);
   const { user } = useAuth();
+  const [validImageUrl, setValidImageUrl] = useState(true);
+
+  const handlerImageError = (error) => {
+    console.log(error);
+    setValidImageUrl(false);
+  };
   return (
     <>
       <div className="min-h-full">
@@ -33,7 +40,7 @@ function NavBar() {
                       Home
                     </NavLink>
                     <NavLink
-                      to={"lost&found"}
+                      to={"lost-and-found"}
                       className={({ isActive }) =>
                         `rounded-md ${
                           isActive
@@ -64,11 +71,13 @@ function NavBar() {
                             aria-expanded="false"
                             aria-haspopup="true"
                           >
-                            <img
-                              className="size-8 rounded-full"
-                              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                              alt=""
+                            <ProfileImageValidate
+                              validImageUrl={validImageUrl}
+                              handlerImageError={handlerImageError}
+                              user={user}
                             />
+                            <span className="h-full w-full absolute rounded-full bg-transparent"></span>
+
                             {showToltip && (
                               <motion.span className=" absolute z-20 top-7 right-5 bg-gray-800 text-white rounded-md p-2 text-nowrap">
                                 {user.displayName}

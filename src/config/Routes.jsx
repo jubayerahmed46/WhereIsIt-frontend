@@ -6,6 +6,7 @@ import {
   AuthLayout,
   Login,
   Signup,
+  Home,
 } from ".";
 
 function Router() {
@@ -13,8 +14,8 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route path="/" index={true} element={<h2>home</h2>} />
-          <Route path="lost&found" element={<h2>posts</h2>} />
+          <Route path="/" index={true} element={<Home />} />
+          <Route path="lost-and-found" element={<h2>posts</h2>} />
           <Route path="auth" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />

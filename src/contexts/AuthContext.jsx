@@ -12,6 +12,7 @@ import { auth } from "../api/firebase/firebase.config";
 const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 
+// eslint-disable-next-line react/prop-types
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);

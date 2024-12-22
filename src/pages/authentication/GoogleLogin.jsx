@@ -1,11 +1,14 @@
+import { useNavigate } from "react-router";
 import Button1 from "../../components/common/btns/Button1";
 import useAuth from "../../hooks/useAuth";
 
 function GoogleLogin() {
   const { signinWithGoogle } = useAuth();
+  const navigate = useNavigate();
   const handlerGoogleLogin = () => {
     signinWithGoogle().then(() => {
       alert("logged in success");
+      navigate("/");
     });
   };
   return (
