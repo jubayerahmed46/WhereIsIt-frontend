@@ -114,10 +114,10 @@ function NavBar() {
                                   } px-3 py-2  text-sm font-medium `
                                 }
                               >
-                                All Recovered Items
+                                All Recovered Post
                               </NavLink>
                               <NavLink
-                                to={"/d"}
+                                to={"/manage-my-posts"}
                                 className={({ isActive }) =>
                                   `rounded-md ${
                                     isActive
@@ -126,7 +126,7 @@ function NavBar() {
                                   } px-3 py-2  text-sm font-medium `
                                 }
                               >
-                                Manage My Items
+                                Manage My Posts
                               </NavLink>
                             </div>
                           </div>

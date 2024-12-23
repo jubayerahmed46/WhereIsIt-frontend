@@ -9,8 +9,10 @@ import {
   Home,
   PrivetRoute,
   AddItem,
+  LostAndFoundItems,
+  PostDefails,
+  ManageMyPosts,
 } from ".";
-import PostDefails from "../pages/post-details/PostDetails";
 
 function Router() {
   return (
@@ -18,11 +20,15 @@ function Router() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="/" index={true} element={<Home />} />
-          <Route path="lost-and-found" element={<h2>posts</h2>} />
+          <Route path="lost-and-found" element={<LostAndFoundItems />} />
           {/* Protected Route */}
           <Route element={<PrivetRoute />}>
             <Route path="add-item" element={<AddItem />}></Route>
           </Route>
+          <Route element={<PrivetRoute />}>
+            <Route path="manage-my-posts" element={<ManageMyPosts />}></Route>
+          </Route>
+
           <Route element={<PrivetRoute />}>
             <Route path="posts/:id" element={<PostDefails />} />
           </Route>
