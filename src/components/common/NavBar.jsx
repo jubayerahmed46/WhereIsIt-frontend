@@ -11,8 +11,7 @@ function NavBar() {
   const { user } = useAuth();
   const [validImageUrl, setValidImageUrl] = useState(true);
 
-  const handlerImageError = (error) => {
-    console.log(error);
+  const handlerImageError = () => {
     setValidImageUrl(false);
   };
   return (

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Button1 from "../../components/common/btns/Button1";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
@@ -8,13 +8,13 @@ export default function Login() {
   const { register, handleSubmit, reset } = useForm();
   const { loginWithEmailAndPass } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const submitFormData = (data) => {
-    console.log(data);
     loginWithEmailAndPass(data.email, data.password).then(() => {
       alert("logged");
       reset();
-      navigate("/");
+      navigate(`${location.state?.from || "/"}`);
     });
   };
   return (

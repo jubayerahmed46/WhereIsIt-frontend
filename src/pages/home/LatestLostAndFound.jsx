@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import axios from "axios";
 import Button1 from "../../components/common/btns/Button1";
+import { Link } from "react-router";
 
 export default function LatestLostAndFound() {
   const [posts, setPosts] = useState([]);
@@ -41,7 +42,10 @@ export default function LatestLostAndFound() {
               <PostCard post={post}></PostCard>
             </div>
           ))}
-          <Button1> See all </Button1>
+          <Link>
+            {" "}
+            <Button1> See all </Button1>
+          </Link>
         </div>
       </div>
     </div>

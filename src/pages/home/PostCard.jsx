@@ -22,7 +22,7 @@ function PostCard({ post }) {
           <p className="mt-1 text-sm text-gray-500">{post.location}</p>
         </div>
       </div>
-      <Link>
+      <Link to={`posts/${post._id}`}>
         <Button1 className={"mt-4"}>View Details</Button1>
       </Link>
     </>

@@ -10,6 +10,7 @@ import {
   PrivetRoute,
   AddItem,
 } from ".";
+import PostDefails from "../pages/post-details/PostDetails";
 
 function Router() {
   return (
@@ -21,6 +22,9 @@ function Router() {
           {/* Protected Route */}
           <Route element={<PrivetRoute />}>
             <Route path="add-item" element={<AddItem />}></Route>
+          </Route>
+          <Route element={<PrivetRoute />}>
+            <Route path="posts/:id" element={<PostDefails />} />
           </Route>
           <Route path="auth" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
