@@ -14,6 +14,7 @@ import {
   ManageMyPosts,
   AllRecoveredPage,
 } from ".";
+import PageNotFound from "../pages/not-found/PageNotFound";
 
 function Router() {
   return (
@@ -43,6 +44,8 @@ function Router() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
           </Route>
+          {/* Catch-all Route */}
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

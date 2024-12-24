@@ -3,6 +3,7 @@ import Button1 from "../../components/common/btns/Button1";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "./GoogleLogin";
+import { Helmet } from "react-helmet-async";
 
 export default function Login() {
   const { register, handleSubmit, reset } = useForm();
@@ -20,6 +21,10 @@ export default function Login() {
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Auth | login</title>
+        </Helmet>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex justify-center flex-col">
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
             Login to your account

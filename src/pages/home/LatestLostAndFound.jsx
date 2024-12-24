@@ -10,7 +10,7 @@ export default function LatestLostAndFound() {
     (async function () {
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/posts?latest=true`
+          `${import.meta.env.VITE_API_URL}/posts?searchText=latest`
         );
         setPosts(data);
       } catch (error) {
@@ -42,8 +42,7 @@ export default function LatestLostAndFound() {
               <PostCard post={post}></PostCard>
             </div>
           ))}
-          <Link>
-            {" "}
+          <Link to={""}>
             <Button1> See all </Button1>
           </Link>
         </div>

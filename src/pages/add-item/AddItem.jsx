@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Button1 from "../../components/common/btns/Button1";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const categories = [
   "Pets",
@@ -65,6 +66,10 @@ export default function AddItem() {
 
   return (
     <div className="space-y-12">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Add New Post</title>
+      </Helmet>
       <div className="border-b border-gray-900/10 pb-12">
         <h2 className="text-3xl font-bold text-gray-900">
           Post for Lost or Found Item

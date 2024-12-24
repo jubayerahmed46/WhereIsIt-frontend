@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Button1 from "../../components/common/btns/Button1";
 import RecoveredForm from "./RecoveredForm";
+import { Helmet } from "react-helmet-async";
 
 export default function PostDefails() {
   const [post, setPost] = useState({});
@@ -28,6 +29,10 @@ export default function PostDefails() {
 
   return (
     <div className="bg-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Posts | Details</title>
+      </Helmet>
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol

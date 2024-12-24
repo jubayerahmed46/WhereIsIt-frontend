@@ -5,6 +5,7 @@ import ValidatePassword from "../../utils/ValidatePassword";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet-async";
 
 export default function Signup() {
   const { register, handleSubmit, reset } = useForm();
@@ -24,7 +25,7 @@ export default function Signup() {
         .then(({ user }) => {
           return updateProfile(user, { displayName: fullname, photoURL });
         })
-        .then(() => {
+        .then((error) => {
           alert("logged");
           reset();
           navigate("/");
@@ -54,6 +55,10 @@ export default function Signup() {
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Auth | signup</title>
+        </Helmet>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
             Create a new Account

@@ -3,7 +3,6 @@ import { Link } from "react-router";
 
 /* eslint-disable react/prop-types */
 function PostCard({ post }) {
-  console.log(post);
   return (
     <>
       <img
