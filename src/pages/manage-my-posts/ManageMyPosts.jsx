@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import DeleteAPost from "./DeleteAPost";
 import { RiEditBoxLine } from "react-icons/ri";
-import EditPost from "./EditPost";
+import { Link } from "react-router";
 
 function ManageMyPosts() {
   const [myPosts, setMyPosts] = useState([]);
   const { user } = useAuth();
-  const [currentPost, setCurrentPost] = useState({});
 
   useEffect(() => {
     if (user) {
@@ -79,20 +78,17 @@ function ManageMyPosts() {
               <td>{post.title.slice(0, 10)}... </td>
               <td>Quality Control Specialist</td>
               <td className="flex gap-2 text-2xl">
-                <label
-                  htmlFor="my_modal_6"
-                  onClick={() => setCurrentPost(() => post)}
-                  className="btn"
-                >
-                  <RiEditBoxLine />
-                </label>
+                <Link to={`/manage-my-posts/${post._id}`}>
+                  <button>
+                    <RiEditBoxLine />
+                  </button>
+                </Link>
                 <DeleteAPost deleteHandler={deleteHandler} id={post._id} />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <EditPost currentPost={currentPost} />
     </div>
   );
 }

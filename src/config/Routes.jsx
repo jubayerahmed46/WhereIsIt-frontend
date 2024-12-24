@@ -13,6 +13,7 @@ import {
   PostDefails,
   ManageMyPosts,
   AllRecoveredPage,
+  EditPost,
 } from ".";
 import PageNotFound from "../pages/not-found/PageNotFound";
 
@@ -39,6 +40,9 @@ function Router() {
 
           <Route element={<PrivetRoute />}>
             <Route path="posts/:id" element={<PostDefails />} />
+          </Route>
+          <Route element={<PrivetRoute />}>
+            <Route path="manage-my-posts/:id" element={<EditPost />} />
           </Route>
           <Route path="auth" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
