@@ -44,7 +44,7 @@ const categories = [
   "Pillows",
 ];
 
-function EditPost({ post }) {
+function EditPost({ post, children }) {
   console.log(new Date(post?.date));
   const { register, handleSubmit, reset } = useForm();
   const [LostOrFoundDate, setLostOrFoundDate] = useState(new Date(post?.date));
@@ -68,12 +68,7 @@ function EditPost({ post }) {
 
   return (
     <div className="relative">
-      <label htmlFor="my_modal_6" className="flex justify-center">
-        <span className="border-r pr-2 cursor-pointer">
-          <FaRegEdit />
-        </span>
-      </label>
-
+      {children}
       {/* Modal Box */}
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal" role="dialog">

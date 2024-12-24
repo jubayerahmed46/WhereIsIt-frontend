@@ -9,3 +9,4 @@ export { default as AddItem } from "../pages/add-item/AddItem";
 export { default as LostAndFoundItems } from "../pages/losedandfounditems/LostAndFoundItems";
 export { default as PostDefails } from "../pages/post-details/PostDetails";
 export { default as ManageMyPosts } from "../pages/manage-my-posts/ManageMyPosts";
+export { default as AllRecoveredPage } from "../pages/all-recovered-page/AllRecoveredPage";

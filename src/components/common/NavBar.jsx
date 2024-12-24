@@ -105,7 +105,7 @@ function NavBar() {
                                 Add Lost or Found Item
                               </NavLink>
                               <NavLink
-                                to={"/d"}
+                                to={"/my-recovered-posts"}
                                 className={({ isActive }) =>
                                   `rounded-md ${
                                     isActive

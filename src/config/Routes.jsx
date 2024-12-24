@@ -12,6 +12,7 @@ import {
   LostAndFoundItems,
   PostDefails,
   ManageMyPosts,
+  AllRecoveredPage,
 } from ".";
 
 function Router() {
@@ -27,6 +28,12 @@ function Router() {
           </Route>
           <Route element={<PrivetRoute />}>
             <Route path="manage-my-posts" element={<ManageMyPosts />}></Route>
+          </Route>
+          <Route element={<PrivetRoute />}>
+            <Route
+              path="my-recovered-posts"
+              element={<AllRecoveredPage />}
+            ></Route>
           </Route>
 
           <Route element={<PrivetRoute />}>

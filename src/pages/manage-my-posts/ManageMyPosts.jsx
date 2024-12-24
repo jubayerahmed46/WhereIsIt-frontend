@@ -76,7 +76,7 @@ function ManageMyPosts() {
               <td>{post.title.slice(0, 10)}... </td>
               <td>Quality Control Specialist</td>
               <td className="flex gap-2 text-2xl">
-                <EditPost updateHandler={updateHandler} post={post} />
+                <EditPost updateHandler={updateHandler} post={post}></EditPost>
                 <DeleteAPost deleteHandler={deleteHandler} id={post._id} />
               </td>
             </tr>
