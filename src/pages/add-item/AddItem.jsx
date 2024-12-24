@@ -55,7 +55,9 @@ export default function AddItem() {
 
     (async function () {
       try {
-        await axios.post(`${import.meta.env.VITE_API_URL}/posts`, formData);
+        await axios.post(`${import.meta.env.VITE_API_URL}/posts`, formData, {
+          withCredentials: true,
+        });
         reset();
         alert("Posted Successfully");
       } catch (error) {

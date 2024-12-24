@@ -2,11 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import DeleteAPost from "./DeleteAPost";
+import { RiEditBoxLine } from "react-icons/ri";
 import EditPost from "./EditPost";
 
 function ManageMyPosts() {
   const [myPosts, setMyPosts] = useState([]);
   const { user } = useAuth();
+  const [currentPost, setCurrentPost] = useState({});
 
   useEffect(() => {
     if (user) {
@@ -43,7 +45,6 @@ function ManageMyPosts() {
     }
   };
 
-  const updateHandler = async (id) => {};
   if (!myPosts.length) {
     return (
       <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -78,13 +79,20 @@ function ManageMyPosts() {
               <td>{post.title.slice(0, 10)}... </td>
               <td>Quality Control Specialist</td>
               <td className="flex gap-2 text-2xl">
-                <EditPost updateHandler={updateHandler} post={post}></EditPost>
+                <label
+                  htmlFor="my_modal_6"
+                  onClick={() => setCurrentPost(() => post)}
+                  className="btn"
+                >
+                  <RiEditBoxLine />
+                </label>
                 <DeleteAPost deleteHandler={deleteHandler} id={post._id} />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <EditPost currentPost={currentPost} />
     </div>
   );
 }
