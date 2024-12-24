@@ -2,10 +2,23 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PostCard from "../home/PostCard";
 import { Helmet } from "react-helmet-async";
+import { TbGridDots } from "react-icons/tb";
+import { MdTableRows } from "react-icons/md";
+
+function getLayout() {
+  let lay = localStorage.getItem("layout");
+  if (!lay) {
+    lay = localStorage.setItem("layout", JSON.stringify(true));
+  }
+  return lay;
+}
 
 function LostAndFoundItems() {
   const [allPost, setAllPost] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [layout, setLayout] = useState(() => {
+    return JSON.parse(getLayout());
+  });
 
   useEffect(() => {
     (async function () {
@@ -21,6 +34,10 @@ function LostAndFoundItems() {
   }, []);
 
   useEffect(() => {
+    localStorage.setItem("layout", JSON.stringify(layout));
+  }, [layout]);
+
+  useEffect(() => {
     (async function () {
       try {
         const { data } = await axios.get(
@@ -32,7 +49,6 @@ function LostAndFoundItems() {
       }
     })();
   }, [searchText]);
-
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
@@ -42,6 +58,17 @@ function LostAndFoundItems() {
         <meta charSet="utf-8" />
         <title>All Lost and Found Post</title>
       </Helmet>
+      <div className="flex justify-between items-center my-9">
+        <h2>Change layout</h2>
+        <div className=" flex gap-3 text-3xl ">
+          <button
+            onClick={() => setLayout((prev) => !prev)}
+            className="cursor-pointer"
+          >
+            {layout ? <MdTableRows /> : <TbGridDots />}
+          </button>
+        </div>
+      </div>
       <div>
         <label className="input input-bordered flex items-center gap-2 mb-5">
           <input
@@ -77,13 +104,59 @@ function LostAndFoundItems() {
         owners or report a found item to make someones day!
       </p>
       <hr className="my-4" />
-      <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mt-8 2xl:grid-cols-4">
-        {allPost.map((post) => (
-          <div key={post._id}>
-            <PostCard post={post}></PostCard>
+      {layout ? (
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mt-8 2xl:grid-cols-4">
+          {allPost.map((post) => (
+            <div key={post._id}>
+              <PostCard post={post}></PostCard>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <div className="overflow-x-auto">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Thumbnail</th>
+                  <th>Title and Decs</th>
+                  <th>locaiton</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {allPost.map((post) => (
+                  <tr key={post._id}>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="">
+                          <div className="mask  w-32">
+                            <img
+                              src={post.thumbnail}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Zemlak, Daniel and Leannon
+                      <br />
+                      <span className="badge badge-ghost badge-sm">
+                        Desktop Support Technician
+                      </span>
+                    </td>
+                    <td>Purple</td>
+                    <th>
+                      <button className="btn btn-ghost btn-xs">details</button>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
