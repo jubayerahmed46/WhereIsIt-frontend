@@ -18,7 +18,8 @@ export default function PostDefails() {
     (async function () {
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/posts/${id}`
+          `${import.meta.env.VITE_API_URL}/posts/${id}`,
+          { withCredentials: true }
         );
         setPost(data);
       } catch (error) {

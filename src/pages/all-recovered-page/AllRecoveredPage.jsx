@@ -13,7 +13,8 @@ function AllRecoveredPage() {
       (async function () {
         try {
           const { data } = await axios.get(
-            `${import.meta.env.VITE_API_URL}/recovered?email=${user.email}`
+            `${import.meta.env.VITE_API_URL}/recovered?email=${user.email}`,
+            { withCredentials: true }
           );
           setRecoveredPost(data);
         } catch (error) {

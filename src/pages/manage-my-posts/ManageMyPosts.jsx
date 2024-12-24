@@ -13,7 +13,8 @@ function ManageMyPosts() {
       (async function () {
         try {
           const { data } = await axios.get(
-            `${import.meta.env.VITE_API_URL}/my-posts/${user.email}`
+            `${import.meta.env.VITE_API_URL}/my-posts/${user.email}`,
+            { withCredentials: true }
           );
           setMyPosts(data);
         } catch (error) {
@@ -28,7 +29,8 @@ function ManageMyPosts() {
     if (ask) {
       try {
         const { data } = await axios.delete(
-          `${import.meta.env.VITE_API_URL}/delete/${id}`
+          `${import.meta.env.VITE_API_URL}/delete/${id}`,
+          { params: { email: user.email }, withCredentials: true }
         );
         if (data?.deletedCount) {
           alert("post deleted");
