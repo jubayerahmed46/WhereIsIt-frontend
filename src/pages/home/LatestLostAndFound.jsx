@@ -42,7 +42,7 @@ export default function LatestLostAndFound() {
               <PostCard post={post}></PostCard>
             </div>
           ))}
-          <Link to={""}>
+          <Link to={"lost-and-found"}>
             <Button1> See all </Button1>
           </Link>
         </div>

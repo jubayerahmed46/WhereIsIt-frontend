@@ -8,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../api/firebase/firebase.config";
+import axios from "axios";
 
 const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
@@ -21,8 +22,34 @@ function AuthProvider({ children }) {
     const unSubs = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
+
+      const token = document.cookie;
       if (currentUser) {
-        //    something will do
+        if (!token) {
+          // console.log(
+          //   "login and create access token. user :",
+          //   currentUser.email
+          // );
+          const user = { email: currentUser.email };
+          axios
+            .post(`${import.meta.env.VITE_API_URL}/create-jwt`, user, {
+              withCredentials: true,
+            })
+            .then((res) => {
+              console.log(res.data);
+            });
+        }
+      } else {
+        if (token) {
+          // console.log("logout and remove access token");
+          axios.delete(
+            `${import.meta.env.VITE_API_URL}/remove-jwt`,
+            {},
+            {
+              withCredentials: true,
+            }
+          );
+        }
       }
 
       setLoading(false);
