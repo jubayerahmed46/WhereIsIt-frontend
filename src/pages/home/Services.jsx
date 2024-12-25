@@ -1,5 +1,3 @@
-import React from "react";
-
 const industries = [
   {
     name: "Public Parks & Gardens",
@@ -53,19 +51,24 @@ const industries = [
 
 const Services = () => {
   return (
-    <div className="pt-10">
-      <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">
+    <div className="pt-10 bg-gray-100">
+      <h2 className="text-3xl  font-bold ml-5 tracking-tight text-gray-900 mb-8 ">
         Industries Serviced
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 p-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 p-6">
         {industries.map((industry) => (
-          <div key={industry.name} className="flex flex-col items-center">
+          <div
+            key={industry.name}
+            className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+          >
             <img
               src={industry.img}
               alt={industry.name}
-              className=" md:h-24 h-16"
+              className="md:h-24 h-20 mb-4"
             />
-            <p className="mt-2 text-center text-sm w-24">{industry.name}</p>
+            <p className="mt-2 text-center text-sm font-medium text-gray-700">
+              {industry.name}
+            </p>
           </div>
         ))}
       </div>

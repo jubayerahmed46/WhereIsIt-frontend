@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import Button1 from "../../components/common/btns/Button1";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 
 const categories = [
   "Pets",
@@ -59,7 +60,7 @@ export default function AddItem() {
           withCredentials: true,
         });
         reset();
-        alert("Posted Successfully");
+        toast.success("Posted Successfully");
       } catch (error) {
         console.log(error.message);
       }

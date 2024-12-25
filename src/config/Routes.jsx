@@ -15,6 +15,7 @@ import {
   AllRecoveredPage,
   EditPost,
 } from ".";
+import AllReviews from "../pages/all-review/AllReviews";
 import PageNotFound from "../pages/not-found/PageNotFound";
 
 function Router() {
@@ -37,6 +38,7 @@ function Router() {
               element={<AllRecoveredPage />}
             ></Route>
           </Route>
+          <Route path="reviews" element={<AllReviews />}></Route>
 
           <Route element={<PrivetRoute />}>
             <Route path="posts/:id" element={<PostDefails />} />

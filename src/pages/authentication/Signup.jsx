@@ -6,12 +6,14 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet-async";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 export default function Signup() {
   const { register, handleSubmit, reset } = useForm();
   const [passError, setPassError] = useState("");
   const { signUpWithEmailAndPass } = useAuth();
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
 
   const onSubmitData = (formData) => {
     formData.password = formData.password.trim();
@@ -25,25 +27,25 @@ export default function Signup() {
         .then(({ user }) => {
           return updateProfile(user, { displayName: fullname, photoURL });
         })
-        .then((error) => {
+        .then(() => {
           alert("logged");
           reset();
           navigate("/");
-          // catch (error) {
-          //   switch (error.code) {
-          //     case "auth/email-already-in-use":
-          //       alert("The email address is already in use.");
-          //       break;
-          //     case "auth/invalid-email":
-          //       alert("The email address is invalid.");
-          //       break;
-          //     case "auth/weak-password":
-          //       alert("The password is too weak.");
-          //       break;
-          //     default:
-          //       alert("An error occurred: " + error.message);
-          //   }
-          // }
+        })
+        .catch((error) => {
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              setPassError("The email address is already in use!");
+              break;
+            case "auth/invalid-credential":
+              setPassError("The credetial is invalid.");
+              break;
+            case "auth/weak-password":
+              setPassError("The password is too weak.");
+              break;
+            default:
+              setPassError("An error occurred: " + error.message);
+          }
         });
     } else {
       setPassError(
@@ -132,6 +134,13 @@ export default function Signup() {
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
+                <button
+                  type="button"
+                  className="text-xl absolute top-2 right-3"
+                  onClick={() => setIsVisible((prev) => !prev)}
+                >
+                  {isVisible ? <IoMdEyeOff /> : <IoMdEye />}
+                </button>
               </div>
               <p className="text-xs text-error mt-1">{passError} </p>
             </div>

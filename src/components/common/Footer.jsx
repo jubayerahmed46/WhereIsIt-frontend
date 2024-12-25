@@ -13,8 +13,12 @@ function Footer() {
             to="/"
             className="flex justify-center space-x-3 lg:justify-start"
           >
-            <div className="shrink-0 rounded-lg pb-2 px-2 transition hover:bg-gray-500">
-              <img className="h-10 " src="/logo.png" alt="WhereIsIt Logo" />
+            <div className="shrink-0 ">
+              <img
+                className="h-10 "
+                src="/footer_logo.png"
+                alt="WhereIsIt Logo"
+              />
             </div>
           </Link>
           <p className="mt-4 text-sm mr-7">
@@ -32,13 +36,13 @@ function Footer() {
             </h3>
             <ul className="space-y-1">
               <li>
-                <Link to="/about">About Us</Link>
+                <Link to="/">About Us</Link>
               </li>
               <li>
-                <Link to="/blog">Blog</Link>
+                <Link to="/">Blog</Link>
               </li>
               <li>
-                <Link to="/contact">Contact</Link>
+                <Link to="/">Contact</Link>
               </li>
             </ul>
           </div>
@@ -50,13 +54,10 @@ function Footer() {
             </h3>
             <ul className="space-y-1">
               <li>
-                <Link to="/report-found-item">Report Found Item</Link>
+                <Link to="/">Report Found Item</Link>
               </li>
               <li>
-                <Link to="/lost-items">Browse Lost Items</Link>
-              </li>
-              <li>
-                <Link to="/claim-item">Claim Your Item</Link>
+                <Link to="/">Browse Lost Items</Link>
               </li>
             </ul>
           </div>
@@ -66,13 +67,13 @@ function Footer() {
             <h3 className="uppercase dark:text-gray-900">Resources</h3>
             <ul className="space-y-1">
               <li>
-                <Link to="/help-center">Help Center</Link>
+                <Link to="/">Help Center</Link>
               </li>
               <li>
-                <Link to="/privacy-policy">Privacy Policy</Link>
+                <Link to="/">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/terms">Terms & Conditions</Link>
+                <Link to="/">Terms & Conditions</Link>
               </li>
             </ul>
           </div>

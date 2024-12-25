@@ -4,19 +4,42 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import GoogleLogin from "./GoogleLogin";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
+import { IoMdEyeOff } from "react-icons/io";
+import { IoMdEye } from "react-icons/io";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const { register, handleSubmit, reset } = useForm();
   const { loginWithEmailAndPass } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isVisible, setIsVisible] = useState(false);
+  const [err, setErr] = useState("");
 
   const submitFormData = (data) => {
-    loginWithEmailAndPass(data.email, data.password).then(() => {
-      alert("logged");
-      reset();
-      navigate(`${location.state?.from || "/"}`);
-    });
+    setErr("");
+    loginWithEmailAndPass(data.email, data.password)
+      .then(() => {
+        toast.success("Login Successful!");
+        reset();
+        navigate(`${location.state?.from || "/"}`);
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            setErr("The email address is already in use!");
+            break;
+          case "auth/invalid-credential":
+            setErr("The credetial is invalid.");
+            break;
+          case "auth/weak-password":
+            setErr("The password is too weak.");
+            break;
+          default:
+            setErr("An error occurred: " + error.message);
+        }
+      });
   };
   return (
     <>
@@ -66,15 +89,24 @@ export default function Login() {
                   </Link>
                 </div>
               </div>
-              <div>
+
+              <div className="relative">
                 <input
                   id="password"
                   {...register("password")}
-                  type="password"
+                  type={isVisible ? "text" : "password"}
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
+                <button
+                  type="button"
+                  className="text-xl absolute top-2 right-3"
+                  onClick={() => setIsVisible((prev) => !prev)}
+                >
+                  {isVisible ? <IoMdEyeOff /> : <IoMdEye />}
+                </button>
               </div>
+              <p className="text-error my-2 text-xs"> {err && err} </p>
             </div>
 
             <div>

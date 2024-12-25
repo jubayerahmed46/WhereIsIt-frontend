@@ -27,8 +27,11 @@ function NavBar() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
-                <div className="shrink-0">
-                  <img className="h-10" src="/logo.png" alt="Your Company" />
+                <div className="shrink-0 hover:bg-gray-800/95 transition-all active:scale-95 pb-1 px-2 rounded-lg">
+                  <Link to={"/"}>
+                    {" "}
+                    <img className="h-10" src="/logo.png" alt="Your Company" />
+                  </Link>
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
@@ -55,6 +58,18 @@ function NavBar() {
                       }
                     >
                       Lost & Found Items
+                    </NavLink>
+                    <NavLink
+                      to="reviews"
+                      className={({ isActive }) =>
+                        `rounded-md ${
+                          isActive
+                            ? "bg-gray-900 text-white"
+                            : "hover:bg-gray-700 hover:text-white"
+                        } px-3 py-2 text-gray-200 text-sm font-medium`
+                      }
+                    >
+                      Our Reviews
                     </NavLink>
                   </div>
                 </div>
@@ -127,7 +142,7 @@ function NavBar() {
                     </>
                   ) : (
                     <Link to="auth/login">
-                      <Button1>Login</Button1>
+                      <Button1 className={"text-white"}>Login</Button1>
                     </Link>
                   )}
                 </div>
@@ -196,6 +211,18 @@ function NavBar() {
               >
                 Lost & Found Items
               </NavLink>
+              <NavLink
+                to="reviews"
+                className={({ isActive }) =>
+                  `block rounded-md ${
+                    isActive
+                      ? "bg-gray-800 text-white"
+                      : "hover:bg-gray-700 hover:text-white text-white/90"
+                  } px-3 py-2 text-base font-medium`
+                }
+              >
+                Our Reviews
+              </NavLink>
               {user ? (
                 <>
                   <NavLink
@@ -220,7 +247,7 @@ function NavBar() {
                 </>
               ) : (
                 <Link to="auth/login" className="block rounded-md px-3 py-2">
-                  <Button1>Login</Button1>
+                  <Button1 className={"text-white"}>Login</Button1>
                 </Link>
               )}
             </div>
