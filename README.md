@@ -6,7 +6,7 @@ This project is a Lost and Found Website, a platform designed to connect individ
 
 ## Live URL
 
-**Firebase**:[Live Site Link](https://whereisit-84e04.web.app)
+**Firebase**: [https://whereisit-84e04.web.app](https://whereisit-84e04.web.app)
 
 ## Key Features
 
@@ -38,8 +38,7 @@ This project is a Lost and Found Website, a platform designed to connect individ
   - Additional sections with relevant content.
 - **Lost and Found Items Page**:
   - Displays all items in card format.
-  - Search functionality to filter items by title or location.
-- ## **Add Lost & Found Item Page**: Users can submit lost or found item details via a form. Successfully submitted posts are stored in the database and display a success toast.
+  - Search functionality to filter items by title or location. -**Add Lost & Found Item Page**: Users can submit lost or found item details via a form. Successfully submitted posts are stored in the database and display a success toast.
 - **Post Details Page**: Displays detailed information about a specific post. Modal functionality for updating item recovery status.
 - **Submit Details Form**: Submit recoveries all information in a modal form
 - **Manage My Items Page**: Displays user-added posts in a table format. Includes update and delete options with confirmation prompts.
@@ -91,9 +90,7 @@ This project is a Lost and Found Website, a platform designed to connect individ
 - **Client Repository**: [GitHub Client](https://classroom.github.com/a/OeQd7p08)
 - **Server Repository**: [GitHub Server](https://classroom.github.com/a/Kdivoc6q)
 
-## Assignment Category
-
-: Assignment_category:**11**
+## Assignment Category - **11**
 
 ## Requirement Document
 
@@ -105,6 +102,18 @@ This project is a Lost and Found Website, a platform designed to connect individ
 
 First, clone the repository to your local machine using Git:
 
-```bash
-git clone https://github.com/your-username/your-repository-name.git
+```cmd
+git clone  git@github.com:jubayerahmed46/my-project.git
+```
+
+Change the directory
+
+```cmd
+cd my-project
+```
+
+Run this command
+
+```cmd
+cd my-project
 ```
