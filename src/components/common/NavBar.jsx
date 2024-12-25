@@ -178,8 +178,8 @@ function NavBar() {
                   `block rounded-md ${
                     isActive
                       ? "bg-gray-800 text-white"
-                      : "hover:bg-gray-700 hover:text-white"
-                  } px-3 py-2 text-base font-medium text-white/90`
+                      : "hover:bg-gray-700 hover:text-white text-white/90"
+                  } px-3 py-2 text-base font-medium `
                 }
               >
                 Home
@@ -190,7 +190,7 @@ function NavBar() {
                   `block rounded-md ${
                     isActive
                       ? "bg-gray-800 text-white"
-                      : "bg-gray-700 hover:text-white"
+                      : "hover:bg-gray-700 hover:text-white text-white/90"
                   } px-3 py-2 text-base font-medium`
                 }
               >

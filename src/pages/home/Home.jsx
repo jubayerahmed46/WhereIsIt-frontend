@@ -1,6 +1,7 @@
 import Banner from "./Banner";
 import LatestLostAndFound from "./LatestLostAndFound";
 import { Helmet } from "react-helmet-async";
+import Services from "./Services";
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
       </Helmet>
       <Banner />
       <LatestLostAndFound />
+      <Services />
     </div>
   );
 }

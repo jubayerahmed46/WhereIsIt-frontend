@@ -45,7 +45,7 @@ function Banner() {
       </Carousel>
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-30">
-        <h1 className="animate__animated text-nowrap animate__fadeInUp text-center lg:text-6xl md:text-5xl text-4xl font-semibold text-white/90 my-2">
+        <h1 className="animate__animated sm:text-nowrap animate__fadeInUp text-center lg:text-6xl md:text-5xl text-4xl font-semibold text-white/90 my-2">
           Online Lost and Found,
         </h1>
         <h2 className="md:text-4xl text-3xl font-light text-center mb-4 text-blue-500">
