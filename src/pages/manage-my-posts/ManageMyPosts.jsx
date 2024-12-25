@@ -65,8 +65,8 @@ function ManageMyPosts() {
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Job</th>
+            <th>Title</th>
+            <th>Desctiption & location</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -75,11 +75,17 @@ function ManageMyPosts() {
           {myPosts?.map((post, seriul) => (
             <tr key={post._id}>
               <th>{seriul + 1} </th>
-              <td>{post.title.slice(0, 10)}... </td>
-              <td>Quality Control Specialist</td>
-              <td className="flex gap-2 text-2xl">
+              <td>
+                <h2 className="font-bold">{post.title.slice(0, 20)}...</h2>{" "}
+                <p> Date: {post.date}</p>
+              </td>
+              <td>
+                <h4>{post.description.slice(0, 40)} </h4>
+                <p className="text-sm text-gray-600">{post.location} </p>
+              </td>
+              <td className="flex gap-2 text-2xl ">
                 <Link to={`/manage-my-posts/${post._id}`}>
-                  <button>
+                  <button className="mt-3">
                     <RiEditBoxLine />
                   </button>
                 </Link>

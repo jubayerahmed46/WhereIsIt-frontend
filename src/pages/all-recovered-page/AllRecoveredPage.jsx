@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import { Button } from "@material-tailwind/react";
+import Button1 from "../../components/common/btns/Button1";
+import { Link } from "react-router";
 
 function AllRecoveredPage() {
   const { user } = useAuth();
@@ -50,18 +53,30 @@ function AllRecoveredPage() {
           <thead>
             <tr>
               <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Actions</th>
+              <th>Title</th>
+              <th>Description and location</th>
+              <th>Category</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {recoverdPost?.map((post, seriul) => (
               <tr key={post._id}>
                 <th>{seriul + 1} </th>
-                <td> {post.title.slice(0, 10)}... </td>
-                <td>Quality Control Specialist</td>
-                <td>lksdjlfjklsd</td>
+                <td>
+                  <h2 className="font-bold">{post.title.slice(0, 20)}...</h2>{" "}
+                  <p> Date: {post.date}</p>
+                </td>
+
+                <td>
+                  <h4>{post.description.slice(0, 40)} </h4>
+                  <p className="text-sm text-gray-600">{post.location} </p>
+                </td>
+                <td>
+                  <Link to={`/posts/${post._id}`}>
+                    <Button1 className={"text-white"}>Details</Button1>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>

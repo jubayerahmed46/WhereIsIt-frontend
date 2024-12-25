@@ -84,7 +84,7 @@ function NavBar() {
                           <summary
                             onMouseOver={() => setShowTooltip(true)}
                             onMouseOut={() => setShowTooltip(false)}
-                            className="cursor-pointer flex items-center rounded-full bg-gray-800 text-sm"
+                            className="cursor-pointer flex items-center rounded-full bg-gray-800 text-sm active:ring"
                           >
                             <ProfileImageValidate
                               validImageUrl={validImageUrl}
