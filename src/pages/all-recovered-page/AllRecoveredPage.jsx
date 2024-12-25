@@ -4,11 +4,13 @@ import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import Button1 from "../../components/common/btns/Button1";
 import { Link } from "react-router";
+import Spinner from "../spinner/Spinner";
 
 function AllRecoveredPage() {
   const { user } = useAuth();
   const [recoverdPost, setRecoveredPost] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loader, setLader] = useState(true);
 
   useEffect(() => {
     if (user) {
@@ -24,10 +26,16 @@ function AllRecoveredPage() {
           const errorFromServer =
             error.response?.data?.message || error.message;
           setErrorMessage(errorFromServer);
+        } finally {
+          setLader(false);
         }
       })();
     }
   }, [user]);
+
+  if (loader) {
+    return <Spinner />;
+  }
 
   return (
     <div className="overflow-x-auto">
@@ -49,6 +57,7 @@ function AllRecoveredPage() {
       ) : (
         <table className="table">
           {/* head */}
+
           <thead>
             <tr>
               <th></th>

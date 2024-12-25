@@ -3,9 +3,11 @@ import PostCard from "./PostCard";
 import axios from "axios";
 import Button1 from "../../components/common/btns/Button1";
 import { Link } from "react-router";
+import Spinner from "../spinner/Spinner";
 
 export default function LatestLostAndFound() {
   const [posts, setPosts] = useState([]);
+  const [loader, setLader] = useState(true);
 
   useEffect(() => {
     (async function () {
@@ -16,9 +18,15 @@ export default function LatestLostAndFound() {
         setPosts(data);
       } catch (error) {
         console.log(error.message);
+      } finally {
+        setLader(false);
       }
     })();
   }, []);
+
+  if (loader) {
+    return <Spinner />;
+  }
 
   return (
     <div className="pt-8 ">

@@ -6,6 +6,7 @@ import { TbGridDots } from "react-icons/tb";
 import { MdTableRows } from "react-icons/md";
 import { Link } from "react-router";
 import Pagination from "./Pagination";
+import Spinner from "../spinner/Spinner";
 
 function getLayout() {
   let lay = localStorage.getItem("layout");
@@ -21,6 +22,8 @@ function LostAndFoundItems() {
   const [layout, setLayout] = useState(() => {
     return JSON.parse(getLayout());
   });
+  const [loader, setLader] = useState(true);
+  const [noData, setNoData] = useState("");
 
   useEffect(() => {
     (async function () {
@@ -31,6 +34,8 @@ function LostAndFoundItems() {
         setAllPost(data);
       } catch (error) {
         console.log(error.message);
+      } finally {
+        setLader(false);
       }
     })();
   }, []);
@@ -40,6 +45,7 @@ function LostAndFoundItems() {
   }, [layout]);
 
   useEffect(() => {
+    setNoData("");
     (async function () {
       try {
         const { data } = await axios.get(
@@ -47,7 +53,8 @@ function LostAndFoundItems() {
         );
         setAllPost(data);
       } catch (error) {
-        console.log(error.message);
+        console.log(error.response?.data?.message);
+        setNoData(error.response?.data?.message);
       }
     })();
   }, [searchText]);
@@ -58,6 +65,11 @@ function LostAndFoundItems() {
   const handleOnpaginationLoadDate = (posts) => {
     setAllPost(posts);
   };
+
+  if (loader) {
+    return <Spinner />;
+  }
+
   return (
     <div>
       <div>
@@ -113,61 +125,69 @@ function LostAndFoundItems() {
           with their owners or report a found item to make someones day!
         </p>
         <hr className="my-4" />
-        {layout ? (
-          <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mt-8 2xl:grid-cols-4">
-            {allPost.map((post) => (
-              <div key={post._id}>
-                <PostCard post={post}></PostCard>
-              </div>
-            ))}
+        {noData ? (
+          <div className="flex justify-center items-center min-h-80">
+            <h2 className="text-2xl font-bold">{noData} </h2>
           </div>
         ) : (
           <div>
-            <div className="overflow-x-scroll  mx-auto">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Thumbnail</th>
-                    <th>Title and Decs</th>
-                    <th>locaiton</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {allPost.map((post) => (
-                    <tr key={post._id}>
-                      <td>
-                        <div className="flex items-center gap-3">
-                          <div className="">
-                            <div className="mask  w-32">
-                              <img
-                                src={post.thumbnail}
-                                alt="Avatar Tailwind CSS Component"
-                              />
+            {layout ? (
+              <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mt-8 2xl:grid-cols-4">
+                {allPost.map((post) => (
+                  <div key={post._id}>
+                    <PostCard post={post}></PostCard>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div>
+                <div className="overflow-x-scroll  mx-auto">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>Thumbnail</th>
+                        <th>Title and Decs</th>
+                        <th>locaiton</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {allPost.map((post) => (
+                        <tr key={post._id}>
+                          <td>
+                            <div className="flex items-center gap-3">
+                              <div className="">
+                                <div className="mask  w-32">
+                                  <img
+                                    src={post.thumbnail}
+                                    alt="Avatar Tailwind CSS Component"
+                                  />
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="text-nowrap ">
-                        {post.title.slice(0, 30)}...
-                        <br />
-                        <span className="badge badge-ghost badge-sm">
-                          {post.description.slice(0, 40)}
-                        </span>
-                      </td>
-                      <td className="text-nowrap">{post.location} </td>
-                      <th>
-                        <Link to={`/posts/${post._id}`}>
-                          <button className="btn btn-ghost btn-xs">
-                            details
-                          </button>
-                        </Link>
-                      </th>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                          </td>
+                          <td className="text-nowrap ">
+                            {post.title.slice(0, 30)}...
+                            <br />
+                            <span className="badge badge-ghost badge-sm">
+                              {post.description.slice(0, 40)}
+                            </span>
+                          </td>
+                          <td className="text-nowrap">{post.location} </td>
+                          <th>
+                            <Link to={`/posts/${post._id}`}>
+                              <button className="btn btn-ghost btn-xs">
+                                details
+                              </button>
+                            </Link>
+                          </th>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

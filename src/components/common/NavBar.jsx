@@ -130,7 +130,7 @@ function NavBar() {
                                     } px-3 py-2 text-sm font-medium`
                                   }
                                 >
-                                  All Recovered Post
+                                  My Recoveries Posts
                                 </NavLink>
                                 <NavLink
                                   onClick={() => setShowDropdown(false)}
@@ -246,7 +246,7 @@ function NavBar() {
                     to="/my-recovered-posts"
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                   >
-                    All Recovered Post
+                    My Recoveries Posts
                   </NavLink>
                   <NavLink
                     to="/manage-my-posts"
