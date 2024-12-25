@@ -94,8 +94,6 @@ This project is a Lost and Found Website, a platform designed to connect individ
 - dotenv
 - express
 - jsonwebtoken
-- mongoose
-- multer
 
 ## Repositories
 
