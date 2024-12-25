@@ -52,7 +52,7 @@ function ManageMyPosts() {
             No Post Availible
           </h1>
           <p className="mt-6 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-            Sorry, we couldn’t find any post
+            we couldn’t find any post
           </p>
         </div>
       </main>

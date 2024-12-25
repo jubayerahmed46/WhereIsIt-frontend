@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
-import { Button } from "@material-tailwind/react";
 import Button1 from "../../components/common/btns/Button1";
 import { Link } from "react-router";
 
@@ -43,7 +42,7 @@ function AllRecoveredPage() {
               {errorMessage}
             </h1>
             <p className="mt-6 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-              Sorry, we couldn’t find Recovered post!
+              You dont have any recovered item
             </p>
           </div>
         </main>

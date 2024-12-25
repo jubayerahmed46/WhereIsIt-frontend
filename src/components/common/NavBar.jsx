@@ -11,6 +11,7 @@ function NavBar() {
   const [showTooltip, setShowTooltip] = useState(false);
   const { user } = useAuth();
   const [validImageUrl, setValidImageUrl] = useState(true);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleImageError = () => {
     setValidImageUrl(false);
@@ -80,64 +81,74 @@ function NavBar() {
                     <>
                       <LogoutUser />
                       <div className="relative ml-3">
-                        <details>
-                          <summary
+                        <div>
+                          <div
                             onMouseOver={() => setShowTooltip(true)}
                             onMouseOut={() => setShowTooltip(false)}
-                            className="cursor-pointer flex items-center rounded-full bg-gray-800 text-sm active:ring"
+                            className={`cursor-pointer flex items-center rounded-full bg-gray-800 text-sm  ${
+                              showDropdown && "ring ring-gray-300"
+                            }`}
+                            onClick={() => setShowDropdown((prev) => !prev)}
                           >
                             <ProfileImageValidate
                               validImageUrl={validImageUrl}
-                              handlerImageError={handleImageError}
+                              handleImageError={handleImageError}
                               user={user}
                             />
                             {showTooltip && (
-                              <motion.span className="absolute top-7 right-5 bg-gray-800 text-white rounded-md p-2">
-                                {user.displayName}
+                              <motion.span className="absolute top-7 right-5 bg-gray-800 text-white rounded-md p-2 text-nowrap">
+                                {user?.displayName}
                               </motion.span>
                             )}
-                          </summary>
-                          <div className="absolute right-0 z-30 mt-2 w-72 flex flex-col rounded-md bg-white shadow-lg">
-                            <div className="flex flex-col mx-auto py-8 w-[80%]">
-                              <NavLink
-                                to="add-item"
-                                className={({ isActive }) =>
-                                  `rounded-md ${
-                                    isActive
-                                      ? "bg-gray-900 text-white"
-                                      : "hover:bg-gray-700 hover:text-white"
-                                  } px-3 py-2 text-sm font-medium`
-                                }
-                              >
-                                Add Lost or Found Item
-                              </NavLink>
-                              <NavLink
-                                to="/my-recovered-posts"
-                                className={({ isActive }) =>
-                                  `rounded-md ${
-                                    isActive
-                                      ? "bg-gray-900 text-white"
-                                      : "hover:bg-gray-700 hover:text-white"
-                                  } px-3 py-2 text-sm font-medium`
-                                }
-                              >
-                                All Recovered Post
-                              </NavLink>
-                              <NavLink
-                                to="/manage-my-posts"
-                                className={({ isActive }) =>
-                                  `rounded-md ${
-                                    isActive
-                                      ? "bg-gray-900 text-white"
-                                      : "hover:bg-gray-700 hover:text-white"
-                                  } px-3 py-2 text-sm font-medium`
-                                }
-                              >
-                                Manage My Posts
-                              </NavLink>
-                            </div>
                           </div>
-                        </details>
+                          {showDropdown && (
+                            <div
+                              className={`absolute right-0 z-30 mt-2 w-72  flex-col rounded-md bg-white shadow-lg`}
+                            >
+                              <div className="flex flex-col mx-auto py-8 w-[80%]">
+                                <NavLink
+                                  to="add-item"
+                                  onClick={() => setShowDropdown(false)}
+                                  className={({ isActive }) =>
+                                    `rounded-md ${
+                                      isActive
+                                        ? "bg-gray-900 text-white"
+                                        : "hover:bg-gray-700 hover:text-white"
+                                    } px-3 py-2 text-sm font-medium`
+                                  }
+                                >
+                                  Add Lost or Found Item
+                                </NavLink>
+                                <NavLink
+                                  onClick={() => setShowDropdown(false)}
+                                  to="/my-recovered-posts"
+                                  className={({ isActive }) =>
+                                    `rounded-md ${
+                                      isActive
+                                        ? "bg-gray-900 text-white"
+                                        : "hover:bg-gray-700 hover:text-white"
+                                    } px-3 py-2 text-sm font-medium`
+                                  }
+                                >
+                                  All Recovered Post
+                                </NavLink>
+                                <NavLink
+                                  onClick={() => setShowDropdown(false)}
+                                  to="/manage-my-posts"
+                                  className={({ isActive }) =>
+                                    `rounded-md ${
+                                      isActive
+                                        ? "bg-gray-900 text-white"
+                                        : "hover:bg-gray-700 hover:text-white"
+                                    } px-3 py-2 text-sm font-medium`
+                                  }
+                                >
+                                  Manage My Posts
+                                </NavLink>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </>
                   ) : (

@@ -5,16 +5,14 @@ import toast from "react-hot-toast";
 function LogoutUser() {
   const { logOut } = useAuth();
   const handleLogout = () => {
-    console.log("trigered");
-
-    const handleConfirm = (toastId) => {
-      toast.dismiss(toastId);
-
+    const handleConfirm = (t) => {
+      toast.dismiss(t.id);
       toast.promise(logOut(), {
         loading: "Processing...",
         success: <b>Logout Successfull</b>,
         error: <b>opps, logout failed.</b>,
       });
+      console.log(t.id);
     };
 
     toast((t) => (
@@ -28,7 +26,7 @@ function LogoutUser() {
         </button>
         <button
           className="bg-green-400 p-1 rounded-md text-white m-2"
-          onClick={handleConfirm}
+          onClick={() => handleConfirm(t)}
         >
           confirm
         </button>

@@ -15,7 +15,7 @@ const googleProvider = new GoogleAuthProvider();
 
 // eslint-disable-next-line react/prop-types
 function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function AuthProvider({ children }) {
       } else {
         if (token) {
           // console.log("logout and remove access token");
-          axios.delete(
+          axios.post(
             `${import.meta.env.VITE_API_URL}/remove-jwt`,
             {},
             {

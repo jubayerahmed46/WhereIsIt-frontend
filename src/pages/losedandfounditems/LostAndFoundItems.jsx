@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { TbGridDots } from "react-icons/tb";
 import { MdTableRows } from "react-icons/md";
 import { Link } from "react-router";
+import Pagination from "./Pagination";
 
 function getLayout() {
   let lay = localStorage.getItem("layout");
@@ -53,6 +54,10 @@ function LostAndFoundItems() {
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
+
+  const handleOnpaginationLoadDate = (posts) => {
+    setAllPost(posts);
+  };
   return (
     <div>
       <div>
@@ -60,40 +65,42 @@ function LostAndFoundItems() {
           <meta charSet="utf-8" />
           <title>All Lost and Found Post</title>
         </Helmet>
-        <div className="flex justify-between items-center my-9">
-          <h2>Change layout</h2>
-          <div className=" flex gap-3 text-3xl ">
-            <button
-              onClick={() => setLayout((prev) => !prev)}
-              className="cursor-pointer"
-            >
-              {layout ? <MdTableRows /> : <TbGridDots />}
-            </button>
-          </div>
-        </div>
-        <div>
-          <label className="input input-bordered flex items-center gap-2 mb-5">
-            <input
-              type="text"
-              className="grow"
-              name="search"
-              placeholder="Search"
-              value={searchText}
-              onChange={handleSearch}
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70 "
-            >
-              <path
-                fillRule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clipRule="evenodd"
+        <div className="flex items-center justify-between bg-gray-200 mb-8 p-1 rounded-md">
+          <div className="w-full ">
+            <label className="input input-bordered flex items-center gap-2 w-full ">
+              <input
+                type="text"
+                className="grow "
+                name="search"
+                placeholder="Search"
+                value={searchText}
+                onChange={handleSearch}
               />
-            </svg>
-          </label>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="h-4 w-4 opacity-70 "
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </label>
+          </div>
+          <div className="flex justify-between items-center  bg-gray-300 py-2 rounded-md ml-2 px-2">
+            <h2 className="mx-3 text-nowrap hidden sm:inline">Change layout</h2>
+            <div className=" flex gap-3 text-3xl ">
+              <button
+                onClick={() => setLayout((prev) => !prev)}
+                className="cursor-pointer"
+              >
+                {layout ? <MdTableRows /> : <TbGridDots />}
+              </button>
+            </div>
+          </div>
         </div>
         <h2 className="text-3xl font-bold text-gray-900">
           Browse All Lost and Found Posts
@@ -116,7 +123,7 @@ function LostAndFoundItems() {
           </div>
         ) : (
           <div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-scroll  mx-auto">
               <table className="table">
                 <thead>
                   <tr>
@@ -141,14 +148,14 @@ function LostAndFoundItems() {
                           </div>
                         </div>
                       </td>
-                      <td>
+                      <td className="text-nowrap ">
                         {post.title.slice(0, 30)}...
                         <br />
                         <span className="badge badge-ghost badge-sm">
                           {post.description.slice(0, 40)}
                         </span>
                       </td>
-                      <td>{post.location} </td>
+                      <td className="text-nowrap">{post.location} </td>
                       <th>
                         <Link to={`/posts/${post._id}`}>
                           <button className="btn btn-ghost btn-xs">
@@ -164,6 +171,7 @@ function LostAndFoundItems() {
           </div>
         )}
       </div>
+      <Pagination handleOnpaginationLoadDate={handleOnpaginationLoadDate} />
     </div>
   );
 }

@@ -7,6 +7,9 @@ html {
   overflow-y: scroll; /* Ensure the vertical scrollbar appears */
   scrollbar-color: gray transparent;
   scrollbar-width: thin;
+}
+
+body {
   overflow-x: hidden;
 }
 
