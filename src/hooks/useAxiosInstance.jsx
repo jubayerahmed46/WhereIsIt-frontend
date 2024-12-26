@@ -19,7 +19,7 @@ function useAxiosInstance() {
 
           if (status === 401) {
             // Unauthorized - Token might be invalid or expired
-            toast.error("Unauthorized! Redirecting to login...");
+            toast.error("Unauthorized!");
           } else if (status === 403) {
             // Forbidden - User doesn't have access
             toast.error("Forbidden! You do not have access.");

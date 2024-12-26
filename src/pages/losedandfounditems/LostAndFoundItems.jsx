@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import PostCard from "../home/PostCard";
 import { Helmet } from "react-helmet-async";

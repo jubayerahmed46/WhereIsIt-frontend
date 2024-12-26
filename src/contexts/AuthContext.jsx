@@ -21,7 +21,6 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const unSubs = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
 
       const token = document.cookie;
