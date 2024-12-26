@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import Button1 from "../../components/common/btns/Button1";
 import { useNavigate, useParams } from "react-router";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
-import { Spinner } from "@material-tailwind/react";
+import Spinner from "../spinner/Spinner";
 
 const categories = [
   "Pets",

@@ -135,9 +135,6 @@ function LostAndFoundItems() {
                   >
                     <PostCard post={post} />
                   </motion.div>
-                  //    <div key={post._id}>
-                  //    <PostCard post={post} />
-                  //  </div>
                 ))}
               </div>
             ) : (
