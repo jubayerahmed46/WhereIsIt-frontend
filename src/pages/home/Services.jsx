@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const industries = [
   {
     name: "Public Parks & Gardens",
@@ -51,15 +53,37 @@ const industries = [
 
 const Services = () => {
   return (
-    <div className="pt-10 bg-gray-100">
-      <h2 className="text-3xl  font-bold ml-5 tracking-tight text-gray-900 mb-8 ">
+    <div className="pt-10 bg-gray-100 mt-12">
+      <motion.h2
+        className="text-3xl font-bold ml-5 tracking-tight text-gray-900 mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
         Industries Serviced
-      </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 p-6">
+      </motion.h2>
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 p-6"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0, scale: 0.9 },
+          visible: {
+            opacity: 1,
+            scale: 1,
+            transition: { staggerChildren: 0.2 },
+          },
+        }}
+      >
         {industries.map((industry) => (
-          <div
+          <motion.div
             key={industry.name}
             className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+            whileHover={{ scale: 1.05 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
           >
             <img
               src={industry.img}
@@ -69,9 +93,9 @@ const Services = () => {
             <p className="mt-2 text-center text-sm font-medium text-gray-700">
               {industry.name}
             </p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

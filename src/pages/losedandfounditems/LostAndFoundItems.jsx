@@ -7,6 +7,7 @@ import { Link } from "react-router";
 import Pagination from "./Pagination";
 import Spinner from "../spinner/Spinner";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
+import { motion } from "framer-motion";
 
 function getLayout() {
   let lay = localStorage.getItem("layout");
@@ -56,28 +57,28 @@ function LostAndFoundItems() {
   }
 
   return (
-    <div>
-      <div>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>All Lost and Found Post</title>
-        </Helmet>
-        <div className="flex items-center justify-between bg-gray-200 mb-8 p-1 rounded-md">
-          <div className="w-full ">
-            <label className="input input-bordered flex items-center gap-2 w-full ">
+    <div className="container mx-auto px-4">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>All Lost and Found Post</title>
+      </Helmet>
+      <div className="bg-white shadow-md rounded-lg p-4 mb-8">
+        <div className="flex flex-wrap justify-between items-center">
+          {/* Search Input */}
+          <div className="w-full sm:w-1/2">
+            <label className="relative block w-full">
               <input
                 type="text"
-                className="grow "
-                name="search"
                 placeholder="Search"
                 value={searchText}
                 onChange={handleSearch}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
                 fill="currentColor"
-                className="h-4 w-4 opacity-70 "
+                viewBox="0 0 16 16"
               >
                 <path
                   fillRule="evenodd"
@@ -87,90 +88,99 @@ function LostAndFoundItems() {
               </svg>
             </label>
           </div>
-          <div className="flex justify-between items-center  bg-gray-300 py-2 rounded-md ml-2 px-2">
-            <h2 className="mx-3 text-nowrap hidden sm:inline">Change layout</h2>
-            <div className=" flex gap-3 text-3xl ">
-              <button
-                onClick={() => setLayout((prev) => !prev)}
-                className="cursor-pointer"
-              >
-                {layout ? <MdTableRows /> : <TbGridDots />}
-              </button>
-            </div>
+
+          {/* Layout Toggle */}
+          <div className="flex items-center mt-4 sm:mt-0">
+            <span className="text-sm text-gray-700 mr-4">Change Layout</span>
+            <button
+              onClick={() => setLayout((prev) => !prev)}
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200"
+            >
+              {layout ? (
+                <MdTableRows className="text-xl" />
+              ) : (
+                <TbGridDots className="text-xl" />
+              )}
+            </button>
           </div>
         </div>
-        <h2 className="text-3xl font-bold text-gray-900">
+      </div>
+
+      {/* Posts Section */}
+      <div>
+        <h2 className="text-2xl font-semibold mb-2 text-gray-900">
           Browse All Lost and Found Posts
         </h2>
-        <p className="mt-1 text-sm text-gray-600">
-          Explore all items that have been reported as lost or found. This
-          section contains detailed posts from users who are either looking for
-          their belongings or have found items they wish to return to their
-          rightful owners. Browse through the list to help reunite lost items
-          with their owners or report a found item to make someones day!
+        <p className="text-sm text-gray-500 mb-4">
+          Explore all items that have been reported as lost or found...
         </p>
-        <hr className="my-4" />
+        <hr className="mb-4" />
+
         {noData ? (
-          <div className="flex justify-center items-center min-h-80">
-            <h2 className="text-2xl font-bold">{noData} </h2>
+          <div className="text-center text-gray-700 text-xl py-12">
+            {noData}
           </div>
         ) : (
           <div>
             {layout ? (
-              <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mt-8 ">
+              <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 mt-8">
                 {allPost.map((post) => (
-                  <div key={post._id}>
-                    <PostCard post={post}></PostCard>
-                  </div>
+                  <motion.div
+                    key={post._id}
+                    className="group relative border p-4 rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow duration-300"
+                    whileHover={{ scale: 1.02 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <PostCard post={post} />
+                  </motion.div>
+                  //    <div key={post._id}>
+                  //    <PostCard post={post} />
+                  //  </div>
                 ))}
               </div>
             ) : (
-              <div>
-                <div className="overflow-x-scroll  mx-auto">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Thumbnail</th>
-                        <th>Title and Decs</th>
-                        <th>locaiton</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {allPost.map((post) => (
-                        <tr key={post._id}>
-                          <td>
-                            <div className="flex items-center gap-3">
-                              <div className="">
-                                <div className="mask  w-32">
-                                  <img
-                                    src={post.thumbnail}
-                                    alt="Avatar Tailwind CSS Component"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="text-nowrap ">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr>
+                      <th className="border-b p-4">Thumbnail</th>
+                      <th className="border-b p-4">Title and Desc</th>
+                      <th className="border-b p-4">Location</th>
+                      <th className="border-b p-4">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {allPost.map((post) => (
+                      <tr key={post._id} className="hover:bg-gray-50">
+                        <td className="p-4">
+                          <img
+                            src={post.thumbnail}
+                            alt={post.title}
+                            className="w-16 h-16 rounded-lg object-cover"
+                          />
+                        </td>
+                        <td className="p-4">
+                          <span className="block font-semibold">
                             {post.title.slice(0, 30)}...
-                            <br />
-                            <span className="badge badge-ghost badge-sm">
-                              {post.description.slice(0, 40)}
-                            </span>
-                          </td>
-                          <td className="text-nowrap">{post.location} </td>
-                          <th>
-                            <Link to={`/posts/${post._id}`}>
-                              <button className="btn btn-ghost btn-xs">
-                                details
-                              </button>
-                            </Link>
-                          </th>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            {post.description.slice(0, 40)}
+                          </span>
+                        </td>
+                        <td className="p-4">{post.location}</td>
+                        <td className="p-4">
+                          <Link to={`/posts/${post._id}`}>
+                            <button className="text-indigo-600 hover:underline">
+                              Details
+                            </button>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>

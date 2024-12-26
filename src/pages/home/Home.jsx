@@ -14,6 +14,7 @@ function Home() {
       <Banner />
       <LatestLostAndFound />
       <Services />
+
       <Reviews />
     </div>
   );
