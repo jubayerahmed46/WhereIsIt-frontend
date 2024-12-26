@@ -26,7 +26,7 @@ function PostCard({ post }) {
           </p>
         </div>
       </div>
-      <Link to={`/posts/${post._id}`}>
+      <Link to={`/postsDetails/${post._id}`}>
         <Button1
           className={
             "mt-4 bg-transparent text-black ring-1 hover:text-white transition-all duration-200"

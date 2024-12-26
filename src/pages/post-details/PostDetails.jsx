@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router"; // Correct import for useParams
+import { useNavigate, useParams } from "react-router";
 import Button1 from "../../components/common/btns/Button1";
 import RecoveredForm from "./RecoveredForm";
 import { Helmet } from "react-helmet-async";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
-import { Spinner } from "@material-tailwind/react";
+import Spinner from "../spinner/Spinner";
 
 export default function PostDetails() {
   const [post, setPost] = useState({});

@@ -41,7 +41,7 @@ function Router() {
           <Route path="reviews" element={<AllReviews />}></Route>
 
           <Route element={<PrivetRoute />}>
-            <Route path="posts/:id" element={<PostDefails />} />
+            <Route path="postsDetails/:id" element={<PostDefails />} />
           </Route>
           <Route element={<PrivetRoute />}>
             <Route path="manage-my-posts/:id" element={<EditPost />} />
