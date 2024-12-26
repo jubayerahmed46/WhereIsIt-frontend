@@ -7,6 +7,7 @@ import { MdTableRows } from "react-icons/md";
 import { Link } from "react-router";
 import Pagination from "./Pagination";
 import Spinner from "../spinner/Spinner";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
 
 function getLayout() {
   let lay = localStorage.getItem("layout");
@@ -22,23 +23,9 @@ function LostAndFoundItems() {
   const [layout, setLayout] = useState(() => {
     return JSON.parse(getLayout());
   });
-  const [loader, setLader] = useState(true);
+  const [loader, setLoader] = useState(true);
   const [noData, setNoData] = useState("");
-
-  useEffect(() => {
-    (async function () {
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/posts`
-        );
-        setAllPost(data);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLader(false);
-      }
-    })();
-  }, []);
+  const instance = useAxiosInstance();
 
   useEffect(() => {
     localStorage.setItem("layout", JSON.stringify(layout));
@@ -48,16 +35,15 @@ function LostAndFoundItems() {
     setNoData("");
     (async function () {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/posts?searchText=${searchText}`
-        );
+        const { data } = await instance.get(`/posts?searchText=${searchText}`);
         setAllPost(data);
       } catch (error) {
-        console.log(error.response?.data?.message);
         setNoData(error.response?.data?.message);
+      } finally {
+        setLoader(false);
       }
     })();
-  }, [searchText]);
+  }, [searchText, instance]);
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
@@ -132,7 +118,7 @@ function LostAndFoundItems() {
         ) : (
           <div>
             {layout ? (
-              <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mt-8 2xl:grid-cols-4">
+              <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5 mt-8 ">
                 {allPost.map((post) => (
                   <div key={post._id}>
                     <PostCard post={post}></PostCard>

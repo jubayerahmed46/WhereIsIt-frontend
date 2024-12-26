@@ -1,29 +1,30 @@
 import { useEffect, useState } from "react";
 import ReviewCard from "../../components/ReviewCard";
-import axios from "axios";
 import Spinner from "../spinner/Spinner";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import { toast } from "react-hot-toast";
 
 function AllReviews() {
   const [reviews, setReviews] = useState([]);
-  const [loader, setLader] = useState(true);
+  const [loader, setLoader] = useState(true);
+  const instance = useAxiosInstance();
 
   useEffect(() => {
-    (async function () {
+    (async function fetchPosts() {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/reviews`,
-          {
-            withCredentials: true,
-          }
-        );
+        const { data } = await instance.get("/reviews");
         setReviews(data);
-      } catch (error) {
-        console.log(error.message);
+      } catch (err) {
+        toast.error("Error fetching posts:", err.message);
       } finally {
-        setLader(false);
+        setLoader(false);
       }
     })();
-  }, []);
+  }, [instance]);
+
+  if (loader) {
+    return <Spinner />;
+  }
 
   return (
     <div>

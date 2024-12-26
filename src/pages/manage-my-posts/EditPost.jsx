@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import Button1 from "../../components/common/btns/Button1";
 import { useNavigate, useParams } from "react-router";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import { Spinner } from "@material-tailwind/react";
 
 const categories = [
   "Pets",
@@ -51,39 +52,35 @@ function EditPost() {
   const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
+  const instance = useAxiosInstance();
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     (async function () {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/posts/${id}`,
-          { withCredentials: true }
-        );
+        const { data } = await instance.get(`/posts/${id}`);
         setPost(data);
-      } catch (error) {
-        console.log(error.message);
+      } finally {
+        setLoader(false);
       }
     })();
-  }, [id]);
+  }, [id, instance]);
 
   const handleUpdatePost = (data) => {
     data.date = LostOrFoundDate.toISOString().slice(0, 10);
     (async function () {
+      setLoader(true);
       try {
-        await axios.patch(
-          `${import.meta.env.VITE_API_URL}/my-posts/update/${id}`,
-          data,
-          { withCredentials: true }
-        );
+        await instance.patch(`/my-posts/update/${id}`, data);
         navigate("/manage-my-posts");
-      } catch (error) {
-        console.log(error.message);
+      } finally {
+        setLoader(false);
       }
     })();
   };
 
-  if (!post) {
-    return <h2>Loading.....</h2>;
+  if (loader) {
+    return <Spinner />;
   }
 
   return (

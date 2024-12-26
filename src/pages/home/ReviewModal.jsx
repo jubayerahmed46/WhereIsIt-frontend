@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Rating } from "@material-tailwind/react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import toast from "react-hot-toast";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
 
 export default function ReviewModal() {
   return (
@@ -25,6 +25,7 @@ function ModalBox() {
   const [rated, setRated] = useState(0);
   const [review, setReview] = useState("");
   const { user } = useAuth();
+  const instance = useAxiosInstance();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,17 +40,10 @@ function ModalBox() {
       date: new Date().toLocaleDateString(),
       rating: rated,
     };
-    console.log(reviewData);
 
     (async function () {
       try {
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/reviews`,
-          reviewData,
-          {
-            withCredentials: true,
-          }
-        );
+        await instance.post(`/reviews`, reviewData);
         toast.success("Thank You for your Reviews");
       } catch (error) {
         console.log(error.message);

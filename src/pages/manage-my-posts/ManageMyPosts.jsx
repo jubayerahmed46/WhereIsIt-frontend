@@ -1,48 +1,79 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import DeleteAPost from "./DeleteAPost";
 import { RiEditBoxLine } from "react-icons/ri";
 import { Link } from "react-router";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import Spinner from "../spinner/Spinner";
+import toast from "react-hot-toast";
 
 function ManageMyPosts() {
   const [myPosts, setMyPosts] = useState([]);
   const { user } = useAuth();
+  const instance = useAxiosInstance();
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     if (user) {
       (async function () {
         try {
-          const { data } = await axios.get(
-            `${import.meta.env.VITE_API_URL}/my-posts/${user.email}`,
-            { withCredentials: true }
-          );
+          const { data } = await instance.get(`/my-posts/${user.email}`);
           setMyPosts(data);
         } catch (error) {
           console.log(error.message);
+        } finally {
+          setLoader(false);
         }
       })();
     }
-  }, [user]);
+  }, [user, instance]);
 
   const deleteHandler = async (id) => {
-    const ask = confirm("are you sure to delete?");
-    if (ask) {
+    const deleting = async () => {
       try {
-        const { data } = await axios.delete(
-          `${import.meta.env.VITE_API_URL}/delete/${id}`,
-          { params: { email: user.email }, withCredentials: true }
-        );
+        const { data } = await instance.delete(`/delete/${id}`, {
+          params: { email: user.email },
+        });
         if (data?.deletedCount) {
-          alert("post deleted");
           const filteredPosts = myPosts.filter((post) => post._id !== id);
           setMyPosts(filteredPosts);
         }
       } catch (error) {
         console.log(error);
       }
-    }
+    };
+
+    const handleConfirm = (t) => {
+      toast.dismiss(t.id);
+      toast.promise(deleting(), {
+        loading: "Processing...",
+        success: <b>Post Deleted Successfull</b>,
+        error: <b>opps, deteling failed.</b>,
+      });
+    };
+
+    toast((t) => (
+      <span>
+        Are You <b>Sure</b>?
+        <button
+          className="bg-orange-300 p-1 rounded-md text-white m-1"
+          onClick={() => toast.dismiss(t.id)}
+        >
+          no
+        </button>
+        <button
+          className="bg-green-400 p-1 rounded-md text-white m-2"
+          onClick={() => handleConfirm(t)}
+        >
+          yes
+        </button>
+      </span>
+    ));
   };
+
+  if (loader) {
+    return <Spinner />;
+  }
 
   if (!myPosts.length) {
     return (

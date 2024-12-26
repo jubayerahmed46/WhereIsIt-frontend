@@ -1,44 +1,41 @@
 /* eslint-disable react/prop-types */
-import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
 
 function Pagination({ handleOnpaginationLoadDate }) {
   const [totalPost, setTotalPost] = useState(0);
   const postPerPage = 6;
   const [currentPage, setCurrentPage] = useState(0);
+  const instance = useAxiosInstance();
 
   const pageCount = Math.ceil(totalPost / postPerPage);
   useEffect(() => {
     (async function () {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/total-post-count`
-        );
+        const { data } = await instance.get(`/total-post-count`);
         setTotalPost(data.count);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
+  }, [instance]);
 
   useEffect(() => {
     (async function () {
       try {
-        const { data } = await axios.get(
-          `${
-            import.meta.env.VITE_API_URL
-          }/posts?page=${currentPage}&size=${postPerPage}`
+        const { data } = await instance.get(
+          `/posts?page=${currentPage}&size=${postPerPage}`
         );
         handleOnpaginationLoadDate(data);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [currentPage]);
+  }, [currentPage, instance]);
 
   if (pageCount <= 1) {
     return;
@@ -60,7 +57,9 @@ function Pagination({ handleOnpaginationLoadDate }) {
       </button>
       {[...Array(pageCount).keys()].map((pageNumber, i) => (
         <button
-          onClick={() => setCurrentPage(() => pageNumber)}
+          onClick={() => {
+            setCurrentPage(() => pageNumber);
+          }}
           className={`${
             currentPage === pageNumber &&
             "border-orange-300 text-white bg-orange-500"

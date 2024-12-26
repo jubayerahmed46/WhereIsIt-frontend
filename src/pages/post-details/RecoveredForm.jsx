@@ -3,14 +3,16 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import Button1 from "../../components/common/btns/Button1";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import { IoCloseSharp } from "react-icons/io5";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import toast from "react-hot-toast";
 
 function RecoveredForm({ itemName, id, handleRecover }) {
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
   const [location, setLocation] = useState("");
   const [locatonError, setLocatonError] = useState("");
+  const instance = useAxiosInstance();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,18 +32,13 @@ function RecoveredForm({ itemName, id, handleRecover }) {
         image: user.photoURL,
       },
     };
-    console.log(recoveryItem);
 
     (async function () {
       try {
         handleRecover();
-        const res = await axios.post(
-          `${import.meta.env.VITE_API_URL}/recoveries`,
-          recoveryItem
-        );
-        console.log(res);
-      } catch (error) {
-        console.log(error.message);
+        await instance.post(`/recoveries`, recoveryItem);
+      } finally {
+        toast.success("Thank you for submitting");
       }
     })();
   };

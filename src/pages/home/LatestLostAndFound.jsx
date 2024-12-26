@@ -1,28 +1,27 @@
 import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
-import axios from "axios";
 import Button1 from "../../components/common/btns/Button1";
 import { Link } from "react-router";
 import Spinner from "../spinner/Spinner";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
 
 export default function LatestLostAndFound() {
   const [posts, setPosts] = useState([]);
-  const [loader, setLader] = useState(true);
+  const [loader, setLoader] = useState(true);
+  const instance = useAxiosInstance();
 
   useEffect(() => {
-    (async function () {
+    (async function fetchPosts() {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/posts?searchText=latest`
-        );
+        const { data } = await instance.get("/posts?searchText=latest");
         setPosts(data);
-      } catch (error) {
-        console.log(error.message);
+      } catch (err) {
+        console.error("Error fetching posts:", err.message);
       } finally {
-        setLader(false);
+        setLoader(false);
       }
     })();
-  }, []);
+  }, [instance]);
 
   if (loader) {
     return <Spinner />;

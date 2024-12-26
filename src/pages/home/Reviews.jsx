@@ -7,26 +7,24 @@ import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import ReviewModal from "./ReviewModal";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import toast from "react-hot-toast";
 
 export default function Reviews() {
   const { user } = useAuth();
   const [reviews, setReviews] = useState([]);
+  const instance = useAxiosInstance();
+
   useEffect(() => {
-    (async function () {
+    (async function fetchPosts() {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/reviews`,
-          {
-            withCredentials: true,
-          }
-        );
+        const { data } = await instance.get("/reviews");
         setReviews(data);
-      } catch (error) {
-        console.log(error.message);
+      } catch (err) {
+        toast.error("Error fetching posts:", err.message);
       }
     })();
-  }, []);
+  }, [instance]);
 
   return (
     <div className="container mx-auto  ">

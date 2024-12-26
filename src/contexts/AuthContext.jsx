@@ -8,7 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../api/firebase/firebase.config";
-import axios from "axios";
+import useAxiosInstance from "../hooks/useAxiosInstance";
 
 const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
@@ -17,6 +17,7 @@ const googleProvider = new GoogleAuthProvider();
 function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const instance = useAxiosInstance();
 
   useEffect(() => {
     const unSubs = onAuthStateChanged(auth, (currentUser) => {
@@ -31,24 +32,14 @@ function AuthProvider({ children }) {
           //   currentUser.email
           // );
           const user = { email: currentUser.email };
-          axios
-            .post(`${import.meta.env.VITE_API_URL}/create-jwt`, user, {
-              withCredentials: true,
-            })
-            .then((res) => {
-              console.log(res.data);
-            });
+          instance.post(`/create-jwt`, user).then((res) => {
+            console.log(res.data);
+          });
         }
       } else {
         if (token) {
           // console.log("logout and remove access token");
-          axios.post(
-            `${import.meta.env.VITE_API_URL}/remove-jwt`,
-            {},
-            {
-              withCredentials: true,
-            }
-          );
+          instance.post(`/remove-jwt`, {});
         }
       }
 
@@ -56,7 +47,7 @@ function AuthProvider({ children }) {
     });
 
     return () => unSubs();
-  }, []);
+  }, [instance]);
 
   const signUpWithEmailAndPass = async (email, pass) => {
     setLoading(true);

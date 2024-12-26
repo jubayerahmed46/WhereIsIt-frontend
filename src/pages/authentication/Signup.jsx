@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet-async";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import toast from "react-hot-toast";
 
 export default function Signup() {
   const { register, handleSubmit, reset } = useForm();
@@ -28,7 +29,7 @@ export default function Signup() {
           return updateProfile(user, { displayName: fullname, photoURL });
         })
         .then(() => {
-          alert("logged");
+          toast.success("Signin Successfull");
           reset();
           navigate("/");
         })

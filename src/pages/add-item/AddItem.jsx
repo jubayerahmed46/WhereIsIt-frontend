@@ -4,9 +4,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Button1 from "../../components/common/btns/Button1";
-import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import { useNavigate } from "react-router";
 
 const categories = [
   "Pets",
@@ -49,6 +50,8 @@ export default function AddItem() {
   const { user } = useAuth();
   const [email, setEmail] = useState(user?.email);
   const [name, setName] = useState(user?.displayName);
+  const instance = useAxiosInstance();
+  const navigate = useNavigate();
 
   const handleAddItems = (formData) => {
     formData.date = LostOrFoundDate.toISOString().slice(0, 10);
@@ -56,11 +59,10 @@ export default function AddItem() {
 
     (async function () {
       try {
-        await axios.post(`${import.meta.env.VITE_API_URL}/posts`, formData, {
-          withCredentials: true,
-        });
+        await instance.post(`/posts`, formData);
         reset();
         toast.success("Posted Successfully");
+        navigate("/manage-my-posts");
       } catch (error) {
         console.log(error.message);
       }
@@ -249,6 +251,7 @@ export default function AddItem() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  readOnly
                   placeholder="Your fullname"
                   className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
                 />
@@ -261,6 +264,7 @@ export default function AddItem() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  readOnly
                   placeholder="Your email"
                   className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
                 />

@@ -1,37 +1,34 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import Button1 from "../../components/common/btns/Button1";
 import { Link } from "react-router";
 import Spinner from "../spinner/Spinner";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
 
 function AllRecoveredPage() {
   const { user } = useAuth();
   const [recoverdPost, setRecoveredPost] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-  const [loader, setLader] = useState(true);
+  const [loader, setLoader] = useState(true);
+  const instance = useAxiosInstance();
 
   useEffect(() => {
     if (user) {
       (async function () {
         try {
-          const { data } = await axios.get(
-            `${import.meta.env.VITE_API_URL}/recovered?email=${user.email}`,
-            { withCredentials: true }
-          );
+          const { data } = await instance.get(`/recovered?email=${user.email}`);
           setRecoveredPost(data);
         } catch (error) {
-          // console.log(error.response?.data || error.message);
           const errorFromServer =
             error.response?.data?.message || error.message;
           setErrorMessage(errorFromServer);
         } finally {
-          setLader(false);
+          setLoader(false);
         }
       })();
     }
-  }, [user]);
+  }, [user, instance]);
 
   if (loader) {
     return <Spinner />;

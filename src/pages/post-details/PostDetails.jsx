@@ -1,14 +1,18 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router"; // Correct import for useParams
+import { useNavigate, useParams } from "react-router"; // Correct import for useParams
 import Button1 from "../../components/common/btns/Button1";
 import RecoveredForm from "./RecoveredForm";
 import { Helmet } from "react-helmet-async";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import { Spinner } from "@material-tailwind/react";
 
 export default function PostDetails() {
   const [post, setPost] = useState({});
   const { id } = useParams();
   const [recovered, setRecovered] = useState(false);
+  const instance = useAxiosInstance();
+  const [loader, setLoader] = useState(true);
+  const navigate = useNavigate();
 
   const handleRecover = () => {
     setRecovered(true);
@@ -17,19 +21,16 @@ export default function PostDetails() {
   useEffect(() => {
     (async function () {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/posts/${id}`,
-          { withCredentials: true }
-        );
+        const { data } = await instance.get(`/posts/${id}`);
         setPost(data);
-      } catch (error) {
-        console.log(error.message);
+      } finally {
+        setLoader(false);
       }
     })();
-  }, [id, recovered]);
+  }, [id, recovered, instance]);
 
-  if (!post?.title) {
-    return;
+  if (loader) {
+    return <Spinner />;
   }
 
   return (
@@ -39,6 +40,9 @@ export default function PostDetails() {
         <title>Post Details | {post.title}</title>
       </Helmet>
       <div className="pt-6">
+        <Button1 onClick={() => navigate(-1)} className={"mb-4"}>
+          Back
+        </Button1>
         <nav aria-label="Breadcrumb">
           <ol
             role="list"
