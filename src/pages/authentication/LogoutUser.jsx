@@ -12,7 +12,6 @@ function LogoutUser() {
         success: <b>Logout Successfull</b>,
         error: <b>opps, logout failed.</b>,
       });
-      console.log(t.id);
     };
 
     toast((t) => (

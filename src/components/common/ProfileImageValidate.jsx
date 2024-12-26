@@ -5,7 +5,7 @@ function ProfileImageValidate({ validImageUrl, handleImageError, user }) {
     <div>
       {!validImageUrl ? (
         <button className="text-2xl size-8 rounded-full bg-orange-500 text-white uppercase">
-          {user?.displayName[0]}
+          {user?.displayName && user?.displayName[0]}
         </button>
       ) : (
         <img
