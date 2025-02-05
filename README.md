@@ -1,13 +1,19 @@
 # (WhereIsIt) - Lost and Found Website
 
+![WhereIsIt Screenshot](https://i.ibb.co.com/fGHdGjgK/Capkjdhsklfhjsdjkhfhsdfture.png)
+
+## Live URL
+
+- **Firebase**: [WhereIsIt Live](https://whereisit-84e04.web.app)
+- **Surge**: [WhereIsIt Live (Surge)](https://whereisit-lostandfound123443.surge.sh)
+
+---
+
 ## Purpose
 
 This project is a Lost and Found Website, a platform designed to connect individuals who have lost personal belongings with those who may have found them. Users can report lost items, browse found items, and interact to recover their belongings. It provides practical experience in building full-stack applications, user authentication, file uploads, database management, and API integration.
 
-## Live URL
-
-**Firebase**: [https://whereisit-84e04.web.app](https://whereisit-84e04.web.app)
-**Surge**: [https://whereisit-lostandfound123443.surge.sh](whereisit-lostandfound123443.surge.sh)
+---
 
 ## Key Features
 
@@ -18,7 +24,7 @@ This project is a Lost and Found Website, a platform designed to connect individ
   - Google or GitHub login option.
 - **User Account Management**:
   - Profile picture and name are displayed in the navbar.
-  - Don't access special routes before logging in.
+  - Prevent access to special routes before logging in.
 
 ### Navigation and Layout
 
@@ -27,7 +33,7 @@ This project is a Lost and Found Website, a platform designed to connect individ
   - Conditional display of login/logout buttons.
   - Hovering over the profile picture displays the user's name.
 - **Footer**:
-  - A beautiful footer with eye-protecting colors.
+  - Beautiful footer with eye-protecting colors.
 - **Dynamic Titles**:
   - Page titles update dynamically based on the current route.
 
@@ -64,6 +70,8 @@ This project is a Lost and Found Website, a platform designed to connect individ
 - **Toast Notifications**: For all CRUD operations, providing meaningful feedback to users.
 - **JWT Authentication**: Implements secure routes using JSON Web Tokens.
 
+---
+
 ## Technologies Used
 
 ### Backend
@@ -89,6 +97,8 @@ This project is a Lost and Found Website, a platform designed to connect individ
 - **React Hook Form**: For form handling.
 - **React Hot Toast**: For notifications.
 
+---
+
 ## NPM Packages
 
 - cors
@@ -96,35 +106,47 @@ This project is a Lost and Found Website, a platform designed to connect individ
 - express
 - jsonwebtoken
 
+---
+
 ## Repositories
 
-- **Client Repository**: [GitHub Client](https://classroom.github.com/a/OeQd7p08)
-- **Server Repository**: [GitHub Server](https://classroom.github.com/a/Kdivoc6q)
+- **[Client Repository](https://classroom.github.com/a/OeQd7p08)**
+- **[Server Repository](https://classroom.github.com/a/Kdivoc6q)**
+
+---
 
 ## Assignment Category - **11**
 
-### Requirement Document [https://docs.google.com/document/d/1dZq4ULnHorWnGcxBWFRcxq7a4wuGuxigUF-NY-uRX2o/edit?usp=sharing](https://docs.google.com/document/d/1dZq4ULnHorWnGcxBWFRcxq7a4wuGuxigUF-NY-uRX2o/edit?usp=sharing)
+- **Requirement Document**: [Click here for the document](https://docs.google.com/document/d/1dZq4ULnHorWnGcxBWFRcxq7a4wuGuxigUF-NY-uRX2o/edit?usp=sharing)
 
-## Run this in you device
+---
 
-First, clone the repository to your local machine using Git:
+## Run This on Your Device
 
-```cmd
-git clone  git@github.com:jubayerahmed46/my-project.git
+### 1. Clone the Repository
+
+```bash
+git clone git@github.com:jubayerahmed46/my-project.git
 ```
-
-Change the directory
-
-```cmd
+```bash
 cd my-project
 ```
-
-Run this command
-
-```cmd
-npm i
+```bash
+npm install
 ```
-
-```cmd
+```bash
 npm run dev
 ```
+
+### Changes Made:
+- **Image**: The screenshot is now at the top of the README.
+- **Project Overview**: A clear description of the project.
+- **Live Site URLs**: Added links to the live versions.
+- **Key Features**: Comprehensive list of features with clear sections.
+- **Tech Stack**: Categorized the technologies used for both frontend and backend.
+- **Repositories**: Added links to both backend and frontend repositories.
+- **Run Locally**: Provided a step-by-step guide to run the project locally.
+- **Additional Info**: Included the requirement document link and assignment category.
+
+Let me know if you need further modifications!
+
