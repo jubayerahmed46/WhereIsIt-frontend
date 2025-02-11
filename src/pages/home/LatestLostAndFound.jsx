@@ -46,16 +46,12 @@ export default function LatestLostAndFound() {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {posts.map((post) => (
-          <motion.div
+          <div
             key={post._id}
-            className="group relative border p-4 rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow duration-300"
-            whileHover={{ scale: 1.02 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            className="group relative border-2 p-4 rounded-lg  bg-white  transition-shadow "
           >
             <PostCard post={post} />
-          </motion.div>
+          </div>
         ))}
       </div>
       <div className="flex justify-center mt-10">

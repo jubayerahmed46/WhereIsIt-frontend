@@ -78,8 +78,8 @@ const Services = () => {
         {industries.map((industry) => (
           <motion.div
             key={industry.name}
-            className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-            whileHover={{ scale: 1.05 }}
+            className="flex flex-col items-center bg-white p-4 rounded-lg shadow-sm transition-shadow duration-300"
+            whileHover={{ scale: 1.01 }}
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 },

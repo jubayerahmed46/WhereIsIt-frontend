@@ -5,119 +5,84 @@ function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="px-4 divide-y dark:bg-gray-100 dark:text-gray-800 border-t bg-gray-300">
-      <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+    <footer className="lg:px-14 md:px-6 px-4 text-white bg-[#003366] text-opacity-90">
+      <div className="max-w-7xl grid lg:grid-cols-3 md:grid-cols-2 justify-between  md:py-16 py-10 mx-auto lg:gap-0 md:gap-8 gap-10">
         {/* Logo Section */}
-        <div className="lg:w-1/3">
+        <div>
           <Link
             to="/"
             className="flex justify-center space-x-3 lg:justify-start"
           >
-            <div className="shrink-0 ">
-              <img
+            <div className="shrink-0 text-2xl font-semibold">
+              {/* <img
                 className="h-10 "
                 src="/footer_logo.png"
                 alt="WhereIsIt Logo"
-              />
+              /> */}
+              WhereIsIt
             </div>
           </Link>
-          <p className="mt-4 text-sm mr-7">
-            WhereIsIt is your trusted platform for connecting individuals who
-            have lost personal belongings with those who have found them.
+          <p className="mt-4 text-sm mr-7 md:text-left text-center">
+            © WhereIsIt Ltd since 2010. All content is copyright. All rights are
+            reserved. The WhereIsIt name is registered as a company, domains and
+            trademarks, and website registered for international copyright
+            protection. For WhereIsIt service marks.
           </p>
         </div>
 
-        {/* Navigation Links */}
-        <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
-          {/* About Links */}
-          <div className="space-y-3">
-            <h3 className="tracking-wide uppercase dark:text-gray-900">
-              About
-            </h3>
-            <ul className="space-y-1">
-              <li>
-                <Link to="/">About Us</Link>
-              </li>
-              <li>
-                <Link to="/">Blog</Link>
-              </li>
-              <li>
-                <Link to="/">Contact</Link>
-              </li>
-            </ul>
+        <div className="font-medium flex flex-col items-center">
+          <h3 className="">Thanks for helping to spread the word...</h3>
+          <div className="flex justify-start space-x-3 text-black my-3">
+            <a
+              href="https://facebook.com"
+              title="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center bg-gray-300 p-2 rounded-full"
+            >
+              <FaFacebookF className="w-5 h-5" />
+            </a>
+            <a
+              href="https://twitter.com"
+              title="Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center bg-gray-300 p-2 rounded-full"
+            >
+              <FaTwitter className="w-5 h-5" />
+            </a>
+            <a
+              href="https://instagram.com"
+              title="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center  bg-gray-300 p-2 rounded-full"
+            >
+              <FaInstagram className="w-5 h-5" />
+            </a>
           </div>
-
-          {/* Services Links */}
-          <div className="space-y-3">
-            <h3 className="tracking-wide uppercase dark:text-gray-900">
-              Services
-            </h3>
-            <ul className="space-y-1">
-              <li>
-                <Link to="/">Report Found Item</Link>
-              </li>
-              <li>
-                <Link to="/">Browse Lost Items</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources Links */}
-          <div className="space-y-3">
-            <h3 className="uppercase dark:text-gray-900">Resources</h3>
-            <ul className="space-y-1">
-              <li>
-                <Link to="/">Help Center</Link>
-              </li>
-              <li>
-                <Link to="/">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link to="/">Terms & Conditions</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social Media Links */}
-          <div className="space-y-3">
-            <h3 className="uppercase dark:text-gray-900">Connect</h3>
-            <div className="flex justify-start space-x-3">
-              <a
-                href="https://facebook.com"
-                title="Facebook"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center p-1"
-              >
-                <FaFacebookF className="w-5 h-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                title="Twitter"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center p-1"
-              >
-                <FaTwitter className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                title="Instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center p-1"
-              >
-                <FaInstagram className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
+          <p>Website problem? Please let us know!</p>
+          <p className="underline cursor-pointer">Contact us</p>
         </div>
-      </div>
 
-      {/* Footer Text */}
-      <div className="py-6 text-sm text-center dark:text-gray-600">
-        © {currentYear} WhereIsIt. Helping you reconnect with your lost
-        belongings.
+        <div>
+          <ul className="lg:text-right text-center space-y-1 text-sm">
+            <li className="hover:underline cursor-pointer">Home</li>
+            <li className="hover:underline cursor-pointer">Tell a friend</li>
+            <li className="hover:underline cursor-pointer">Enter our draw</li>
+            <li className="hover:underline cursor-pointer">Become a member</li>
+            <li className="hover:underline cursor-pointer">
+              Report found property
+            </li>
+            <li className="hover:underline cursor-pointer">Website map</li>
+            <li className="hover:underline cursor-pointer">
+              Privacy and terms
+            </li>
+            <li className="hover:underline cursor-pointer">
+              Guarantee and purpose
+            </li>
+          </ul>
+        </div>
       </div>
     </footer>
   );
