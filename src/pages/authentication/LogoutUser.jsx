@@ -1,3 +1,4 @@
+import { HiOutlineLogout } from "react-icons/hi";
 import Button1 from "../../components/common/btns/Button1";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -35,11 +36,9 @@ function LogoutUser() {
   return (
     <Button1
       onClick={handleLogout}
-      className={
-        " focus:ring-gray-700 hover:bg-gray-800 bg-gray-800/80 text-white"
-      }
+      className={" bg-white text-black hover:bg-white/90"}
     >
-      Logout
+      <HiOutlineLogout className="text-xl" />
     </Button1>
   );
 }

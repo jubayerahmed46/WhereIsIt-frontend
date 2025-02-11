@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import Pagination from "./Pagination";
 import Spinner from "../spinner/Spinner";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
-import { motion } from "framer-motion";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function getLayout() {
   let lay = localStorage.getItem("layout");
@@ -57,12 +57,12 @@ function LostAndFoundItems() {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className=" mx-auto max-w-7xl lg:px-9 md:px-5 px-3 mt-28">
       <Helmet>
         <meta charSet="utf-8" />
         <title>All Lost and Found Post</title>
       </Helmet>
-      <div className="bg-white shadow-md rounded-lg p-4 mb-8">
+      <div className="border-2  rounded-md p-4 mb-8">
         <div className="flex flex-wrap justify-between items-center">
           {/* Search Input */}
           <div className="w-full sm:w-1/2">
@@ -72,8 +72,9 @@ function LostAndFoundItems() {
                 placeholder="Search"
                 value={searchText}
                 onChange={handleSearch}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 ring-black/70"
               />
+              <CircularProgress />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
@@ -125,16 +126,12 @@ function LostAndFoundItems() {
             {layout ? (
               <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 mt-8">
                 {allPost.map((post) => (
-                  <motion.div
+                  <div
                     key={post._id}
                     className="group relative border p-4 rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow duration-300"
-                    whileHover={{ scale: 1.02 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
                   >
                     <PostCard post={post} />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             ) : (

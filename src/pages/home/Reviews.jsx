@@ -27,7 +27,7 @@ export default function Reviews() {
   }, [instance]);
 
   return (
-    <div className="container mx-auto  ">
+    <div className="">
       <h2 className="text-3xl font-bold tracking-tight text-gray-900 my-5 mt-12 ">
         Our Reviews
       </h2>

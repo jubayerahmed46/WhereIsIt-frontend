@@ -19,7 +19,7 @@ function Banner() {
   return (
     <div className="relative mt-7">
       <Carousel
-        className="rounded-xl 2xl:h-[550px] lg:h-[520px] md:h-[470px] h-[520px]"
+        className=" 2xl:h-[550px] lg:h-[520px] md:h-[470px] h-[520px]"
         navigation={({ setActiveIndex, activeIndex, length }) => (
           <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
             {new Array(length).fill("").map((_, i) => (

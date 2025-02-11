@@ -5,10 +5,11 @@ import { Toaster } from "react-hot-toast";
 
 function MainLayout() {
   return (
-    <div>
-      <div className="mx-auto max-w-7xl lg:px-14 md:px-6 px-4">
-        <NavBar />
-        <main className=" px-4 py-6 sm:px-6 lg:px-8 min-h-96">
+    <div className="relative">
+      <NavBar />
+      <div>
+        {/* mx-auto max-w-7xl lg:px-9 md:px-5 px-3  */}
+        <main className=" min-h-96">
           <Outlet />
         </main>
       </div>

@@ -6,16 +6,19 @@ import Reviews from "./Reviews";
 
 function Home() {
   return (
-    <div>
+    <div className="mt-20">
       <Helmet>
         <meta charSet="utf-8" />
         <title>WhereIsIt | Home</title>
       </Helmet>
       <Banner />
-      <LatestLostAndFound />
+      <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
+        <LatestLostAndFound />
+      </div>
       <Services />
-
-      <Reviews />
+      <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
+        <Reviews />
+      </div>
     </div>
   );
 }

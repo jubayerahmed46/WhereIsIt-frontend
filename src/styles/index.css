@@ -32,3 +32,11 @@ html::-webkit-scrollbar-thumb {
 html::-webkit-scrollbar-thumb:hover {
   background-color: darkgray; /* Change color on hover */
 }
+
+color-myprimary {
+  color: #003366;
+}
+
+color-mysecondary {
+  color: #cc0000;
+}
