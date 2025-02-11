@@ -3,16 +3,16 @@ import { Carousel } from "@material-tailwind/react";
 function Banner() {
   const images = [
     {
-      id: 1,
-      url: "https://i.ibb.co/vkkH3Fw/17ebf61beeb4c237b816fd1a89da57654a03f211.jpg",
+      id: 134,
+      url: " https://i.ibb.co.com/d0vj6LGH/Father-comforts-son-at-airport.webp",
     },
     {
-      id: 2,
+      id: 2345,
       url: "https://i.ibb.co/YjfvXcc/blog-frontpage-crying.jpg",
     },
     {
-      id: 3,
-      url: "https://i.ibb.co/HFGKcZM/the-etiquette-of-finding-and-returning-lost-items.webp",
+      id: 3435,
+      url: " https://i.ibb.co.com/ZRkr7910/Lost-and-Found-Items-Key-Street-Shutterstock.webp",
     },
   ];
 
@@ -44,17 +44,17 @@ function Banner() {
         ))}
       </Carousel>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-30  w-9/12">
-        <h1 className="sm:text-nowrap text-center lg:text-6xl md:text-5xl text-3xl font-semibold text-blue-700 my-2 uppercase ">
-          Online Lost and Found,
-        </h1>
-        <h2 className="md:text-4xl text-2xl font-bold text-center mb-4 text-[#d7d7d7] uppercase">
-          Locate lost or found items!
-        </h2>
-        <p className="md:text-xl text-base text-center text-white/80 max-w-2xl mx-auto">
-          Reuniting lost items with their rightful owners. Let’s make
-          lost-and-found easier for everyone!
-        </p>
+      <div className="text-left   absolute bottom-0 md:pl-10 md:pb-10 mx-auto max-w-7xl lg:px-9 md:px-5 px-3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-30  w-9/12">
+        <div className="absolute md:-bottom-24 -bottom-20 lg:-left-20 xl:-left-32 md:-left-20 -left-10 ">
+          <h1 className="  lg:text-5xl md:text-4xl text-3xl  font-semibold  my-2 capitalize  max-w-xl ">
+            Online Lost and Found, Locate For Lost & Found Items
+          </h1>
+
+          <p className="md:text-xl text-base max-w-2xl">
+            Reuniting lost items with their rightful owners. Let’s make
+            lost-and-found easier for everyone!
+          </p>
+        </div>
       </div>
     </div>
   );

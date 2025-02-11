@@ -45,30 +45,31 @@ function NavBar() {
   };
 
   const links = [
-    { id: 23423, label: "Home", path: "/" },
-    { id: 26423, label: "Lost & Found Items", path: "lost-and-found" },
-    { id: 83423, label: " Our Reviews", path: "reviews" },
+    { id: 23435423, label: "Home", path: "/" },
+    { id: 2645423, label: "Lost & Found Items", path: "lost-and-found" },
+    { id: 83435423, label: " Our Reviews", path: "reviews" },
   ];
 
   if (user) {
     links.push(
-      { id: 33423, label: "Post Item", path: "add-item" },
-      { id: 53423, label: " My Recoveries Items", path: "my-recovered-posts" },
-      { id: 363423, label: " Manage My Items", path: "manage-my-posts" }
+      { id: 3334423, label: "Post Item", path: "add-item" },
+      {
+        id: 5343423,
+        label: " My Recoveries Items",
+        path: "my-recovered-posts",
+      },
+      { id: 363345423, label: " Manage My Items", path: "manage-my-posts" }
     );
   }
-  links.push({ id: 363423, label: " Contact Us", path: "contact" });
+  links.push({ id: 3634233423, label: " Contact Us", path: "contact" });
 
   return (
     <nav
-      // className={` text-white py-2 z-50 transition-all duration-500 ${
-      //   hidden ? "relative w-full  -top-24" : "fixed w-full  top-0"
-      // }`}
-      className={`fixed top-0 w-full   transition-transform duration-300 z-50 text-white  md:py-0 ${
+      className={`fixed top-0 w-full   transition-transform duration-300 z-50 text-white  ${
         hidden ? "-translate-y-full" : "translate-y-0 bg-[#003366] "
       } `}
     >
-      <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3 md:py-0 py-4">
+      <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3 lg:py-0 py-4">
         <div>
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-between  w-full">
@@ -79,7 +80,7 @@ function NavBar() {
                 </Link>
               </div>
               {/* links, logout and others */}
-              <div className="hidden md:flex items-center">
+              <div className="hidden lg:flex items-center">
                 <div className=" flex items-baseline space-x-4">
                   {links.map((link) => (
                     <NavLink
@@ -97,7 +98,7 @@ function NavBar() {
                     </NavLink>
                   ))}
                 </div>
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                   <div className="ml-4 flex items-center md:ml-6">
                     {user ? (
                       <>
@@ -133,7 +134,7 @@ function NavBar() {
               </div>
             </div>
 
-            <div className="flex md:hidden">
+            <div className="flex lg:hidden">
               <button
                 onClick={toggleMobileMenu}
                 className="p-2 transition-all duration-150"
