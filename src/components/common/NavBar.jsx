@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import LogoutUser from "../../pages/authentication/LogoutUser";
 import ProfileImageValidate from "./ProfileImageValidate";
+import { TfiClose, TfiMenu } from "react-icons/tfi";
 
 function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,8 +36,6 @@ function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  console.log(hidden);
-
   const handleImageError = () => {
     setValidImageUrl(false);
   };
@@ -49,11 +48,16 @@ function NavBar() {
     { id: 23423, label: "Home", path: "/" },
     { id: 26423, label: "Lost & Found Items", path: "lost-and-found" },
     { id: 83423, label: " Our Reviews", path: "reviews" },
-    { id: 33423, label: "Post Item", path: "add-item" },
-    { id: 53423, label: " My Recoveries Items", path: "my-recovered-posts" },
-    { id: 363423, label: " Manage My Items", path: "manage-my-posts" },
-    { id: 363423, label: " Contact Us", path: "contact" },
   ];
+
+  if (user) {
+    links.push(
+      { id: 33423, label: "Post Item", path: "add-item" },
+      { id: 53423, label: " My Recoveries Items", path: "my-recovered-posts" },
+      { id: 363423, label: " Manage My Items", path: "manage-my-posts" }
+    );
+  }
+  links.push({ id: 363423, label: " Contact Us", path: "contact" });
 
   return (
     <nav
@@ -84,9 +88,9 @@ function NavBar() {
                       className={({ isActive }) =>
                         `rounded-md -tracking-wide py-8 transition-all duration-200 ${
                           isActive
-                            ? "text-[#FB8C00] font-bold"
-                            : "hover:bg-[#cc0000] "
-                        } px-3 py-2 uppercase text-xs rounded-none h-full font-medium`
+                            ? "text-[#FB8C00] hover:bg-[#cc0000] hover:text-white font-semibold"
+                            : "hover:bg-[#cc0000]"
+                        } px-3 py-2 uppercase text-xs rounded-none h-full `
                       }
                     >
                       {link.label}
@@ -132,108 +136,43 @@ function NavBar() {
             <div className="flex md:hidden">
               <button
                 onClick={toggleMobileMenu}
-                className="rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white "
+                className="p-2 transition-all duration-150"
               >
                 {mobileMenuOpen ? (
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <TfiClose className="text-xl font-bold" />
                 ) : (
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                    />
-                  </svg>
+                  <TfiMenu className="text-xl" />
                 )}
               </button>
             </div>
           </div>
         </div>
-        {mobileMenuOpen && (
-          <div className="md:hidden px-2 pb-3 pt-2 sm:px-3">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `block rounded-md ${
-                  isActive
-                    ? "bg-gray-800 text-white"
-                    : "hover:bg-gray-700 hover:text-white text-white/90"
-                } px-3 py-2 text-base font-medium `
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="lost-and-found"
-              className={({ isActive }) =>
-                `block rounded-md ${
-                  isActive
-                    ? "bg-gray-800 text-white"
-                    : "hover:bg-gray-700 hover:text-white text-white/90"
-                } px-3 py-2 text-base font-medium`
-              }
-            >
-              Lost & Found Items
-            </NavLink>
-            <NavLink
-              to="reviews"
-              className={({ isActive }) =>
-                `block rounded-md ${
-                  isActive
-                    ? "bg-gray-800 text-white"
-                    : "hover:bg-gray-700 hover:text-white text-white/90"
-                } px-3 py-2 text-base font-medium`
-              }
-            >
-              Our Reviews
-            </NavLink>
-            {user ? (
-              <>
+        {
+          <div
+            className={`px-2 pb-3 pt-2 sm:px-3  flex ${
+              mobileMenuOpen ? "h-auto" : "hidden"
+            } `}
+          >
+            <div className=" flex flex-col w-full">
+              {links.map((link) => (
                 <NavLink
-                  to="add-item"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                  key={link.id}
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `rounded-md -tracking-wide py-3 transition-all duration-200 ${
+                      isActive
+                        ? "text-[#FB8C00] hover:bg-[#cc0000] hover:text-white font-semibold"
+                        : "hover:bg-[#cc0000]"
+                    } px-3 py-2 uppercase text-xs rounded-none w-full `
+                  }
                 >
-                  Add Lost or Found Item
+                  {link.label}
                 </NavLink>
-                <NavLink
-                  to="/my-recovered-posts"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                >
-                  My Recoveries Items
-                </NavLink>
-                <NavLink
-                  to="/manage-my-posts"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                >
-                  Manage My Items
-                </NavLink>
-                <LogoutUser />
-              </>
-            ) : (
-              <Link to="auth/login" className="block rounded-md px-3 py-2">
-                <Button1 className={"text-white"}>Login</Button1>
-              </Link>
-            )}
+              ))}
+            </div>
           </div>
-        )}
+        }
       </div>
     </nav>
   );

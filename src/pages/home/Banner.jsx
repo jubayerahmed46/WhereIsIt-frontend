@@ -44,14 +44,14 @@ function Banner() {
         ))}
       </Carousel>
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-30 md:w-full w-9/12">
-        <h1 className="sm:text-nowrap text-center lg:text-6xl md:text-5xl text-3xl font-semibold text-white/90 my-2">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-30  w-9/12">
+        <h1 className="sm:text-nowrap text-center lg:text-6xl md:text-5xl text-3xl font-semibold text-blue-700 my-2 uppercase ">
           Online Lost and Found,
         </h1>
-        <h2 className="md:text-4xl text-2xl font-light text-center mb-4 text-blue-500">
+        <h2 className="md:text-4xl text-2xl font-bold text-center mb-4 text-[#d7d7d7] uppercase">
           Locate lost or found items!
         </h2>
-        <p className="md:text-xl text-base text-center text-white/80">
+        <p className="md:text-xl text-base text-center text-white/80 max-w-2xl mx-auto">
           Reuniting lost items with their rightful owners. Let’s make
           lost-and-found easier for everyone!
         </p>
