@@ -90,8 +90,8 @@ function NavBar() {
                         `rounded-md -tracking-wide py-8 transition-all duration-200 ${
                           isActive
                             ? "text-[#FB8C00] hover:bg-[#cc0000] hover:text-white font-semibold"
-                            : "hover:bg-[#cc0000]"
-                        } px-3 py-2 uppercase text-xs rounded-none h-full `
+                            : "hover:bg-[#cc0000] "
+                        } px-3 py-2 uppercase text-xs text-center rounded-none h-full `
                       }
                     >
                       {link.label}
@@ -171,6 +171,37 @@ function NavBar() {
                   {link.label}
                 </NavLink>
               ))}
+              <div className=" flex items-center mt-4 border-t pt-4">
+                {user ? (
+                  <>
+                    <LogoutUser />
+                    <div className="relative ml-3">
+                      <div>
+                        <div
+                          onMouseOver={() => setShowTooltip(true)}
+                          onMouseOut={() => setShowTooltip(false)}
+                          className={`cursor-pointer flex items-center rounded-full bg-gray-800 text-sm `}
+                        >
+                          <ProfileImageValidate
+                            validImageUrl={validImageUrl}
+                            handleImageError={handleImageError}
+                            user={user}
+                          />
+                          {showTooltip && (
+                            <span className="absolute top-7 right-5 bg-gray-800 text-white rounded-md p-2 text-nowrap">
+                              {user?.displayName}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <Link to="auth/login">
+                    <Button1 className={"text-white"}>Login</Button1>
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         }

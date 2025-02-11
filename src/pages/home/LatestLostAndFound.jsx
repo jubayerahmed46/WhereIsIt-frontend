@@ -54,11 +54,14 @@ export default function LatestLostAndFound() {
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-10">
+      <div className=" mt-10">
         <Link to="/lost-and-found">
-          <Button1 className="text-white bg-blue-600 hover:bg-blue-700">
-            See All
-          </Button1>
+          <button
+            className={`py-2 px-3  text-white rounded-md hover:bg-black transition-all duration-300 
+          bg-[#003366] `}
+          >
+            Find Out More
+          </button>
         </Link>
       </div>
     </motion.div>

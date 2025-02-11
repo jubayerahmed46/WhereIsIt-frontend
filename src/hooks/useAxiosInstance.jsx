@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 const instance = axios.create({
-  baseURL: "https://whereisit-server.vercel.app",
+  // baseURL: "https://whereisit-server.vercel.app",
+  baseURL: "http://localhost:5000",
   withCredentials: true,
 });
 

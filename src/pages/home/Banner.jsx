@@ -45,7 +45,7 @@ function Banner() {
       </Carousel>
 
       <div className="text-left   absolute bottom-0 md:pl-10 md:pb-10 mx-auto max-w-7xl lg:px-9 md:px-5 px-3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white z-30  w-9/12">
-        <div className="absolute md:-bottom-24 -bottom-20 lg:-left-20 xl:-left-32 md:-left-20 -left-10 ">
+        <div className="absolute md:-bottom-24 -bottom-20 2xl:left-10 lg:-left-20 xl:-left-32 md:-left-20 -left-8 ">
           <h1 className="  lg:text-5xl md:text-4xl text-3xl  font-semibold  my-2 capitalize  max-w-xl ">
             Online Lost and Found, Locate For Lost & Found Items
           </h1>

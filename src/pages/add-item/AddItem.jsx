@@ -8,6 +8,8 @@ import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import { useNavigate } from "react-router";
+import addPost from "/public/add.png";
+import Heading from "../../components/sectionHeading/Heading";
 
 const categories = [
   "Pets",
@@ -53,228 +55,147 @@ export default function AddItem() {
   const instance = useAxiosInstance();
   const navigate = useNavigate();
 
-  const handleAddItems = (formData) => {
+  const handleAddItems = async (formData) => {
     formData.date = LostOrFoundDate.toISOString().slice(0, 10);
-    console.log(formData);
-
-    (async function () {
-      try {
-        await instance.post(`/posts`, formData);
-        reset();
-        toast.success("Posted Successfully");
-        navigate("/manage-my-posts");
-      } catch (error) {
-        console.log(error.message);
-      }
-    })();
+    try {
+      await instance.post(`/posts`, formData);
+      reset();
+      toast.success("Posted Successfully");
+      navigate("/manage-my-posts");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
-    <div className="space-y-12">
+    <div className="mt-28  mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
       <Helmet>
-        <meta charSet="utf-8" />
         <title>Add New Post</title>
       </Helmet>
-      <div className="border-b border-gray-900/10 pb-12">
-        <h2 className="text-3xl font-bold text-gray-900">
-          Post for Lost or Found Item
-        </h2>
-        <p className="mt-1 text-sm text-gray-600">
-          Easily post details about a lost or found item to help reunite it with
-          its owner. Provide essential information to make it easier for others
-          to identify and contact you.
-        </p>
+      <div>
+        <Heading>Post for Lost or Found Item</Heading>
 
+        <p className="mb-7 -mt-4 font-medium text-sm">
+          Provide details to help identify the lost or found item.
+        </p>
+      </div>
+
+      <div className="mb-16   flex lg:gap-24 gap-14  lg:flex-row flex-col">
         <form
           onSubmit={handleSubmit(handleAddItems)}
-          className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+          className="space-y-4 w-full bg-[#00336617] md:p-6  p-3"
         >
-          {/* Title */}
-          <div className="sm:col-span-6">
-            <label
-              htmlFor="title"
-              className="block text-sm font-medium text-gray-900"
-            >
+          <div>
+            <label className="block font-bold text-lg mb-1" htmlFor="title">
               Title
             </label>
-            <div className="mt-2">
-              <input
-                id="title"
-                {...register("title")}
-                type="text"
-                required
-                placeholder="Enter the title of the item"
-                className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-              />
-            </div>
+            <input
+              id="title"
+              {...register("title")}
+              type="text"
+              required
+              className="w-full border rounded-sm p-2 focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+            />
           </div>
 
-          {/* Post Type */}
-          <div className="sm:col-span-3">
-            <label
-              htmlFor="post-type"
-              className="block text-sm font-medium text-gray-900"
-            >
+          <div>
+            <label className="block font-bold text-lg mb-1" htmlFor="post-type">
               Post Type
             </label>
-            <div className="mt-2">
-              <select
-                {...register("postType")}
-                id="post-type"
-                required
-                className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-              >
-                <option disabled>Select Post Type</option>
-                <option value="lost">Lost</option>
-                <option value="found">Found</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Thumbnail (Image Upload) */}
-          <div className="sm:col-span-3">
-            <label
-              htmlFor="thumbnail"
-              className="block text-sm font-medium text-gray-900"
+            <select
+              {...register("postType")}
+              id="post-type"
+              required
+              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
             >
-              Thumbnail (Image)
-            </label>
-            <div className="mt-2">
-              <input
-                id="thumbnail"
-                {...register("thumbnail")}
-                type="text"
-                required
-                placeholder="image URL"
-                className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-              />
-            </div>
+              <option disabled>Select Post Type</option>
+              <option value="lost">Lost</option>
+              <option value="found">Found</option>
+            </select>
           </div>
 
-          {/* Description */}
-          <div className="sm:col-span-6">
+          <div>
+            <label className="block font-bold text-lg mb-1" htmlFor="thumbnail">
+              Thumbnail (Image URL)
+            </label>
+            <input
+              id="thumbnail"
+              {...register("thumbnail")}
+              type="text"
+              required
+              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+            />
+          </div>
+
+          <div>
             <label
+              className="block font-bold text-lg mb-1"
               htmlFor="description"
-              className="block text-sm font-medium text-gray-900"
             >
               Description
             </label>
-            <div className="mt-2">
-              <textarea
-                id="description"
-                {...register("description")}
-                required
-                rows="4"
-                placeholder="Provide a detailed description of the item"
-                className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-              />
-            </div>
+            <textarea
+              id="description"
+              {...register("description")}
+              required
+              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+              rows="4"
+            ></textarea>
           </div>
 
-          {/* Category */}
-          <div className="sm:col-span-3">
-            <label
-              htmlFor="category"
-              className="block text-sm font-medium text-gray-900"
-            >
+          <div>
+            <label className="block font-bold text-lg mb-1" htmlFor="category">
               Category
             </label>
-            <div className="mt-2">
-              <select
-                id="category"
-                {...register("category")}
-                className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-              >
-                <option value="" disabled>
-                  Select Category
+            <select
+              id="category"
+              {...register("category")}
+              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+            >
+              <option value="" disabled>
+                Select Category
+              </option>
+              {categories.map((option) => (
+                <option key={option} value={option.toLowerCase()}>
+                  {option}
                 </option>
-                {categories.map((option) => (
-                  <option key={option} value={option.toLowerCase()}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
+              ))}
+            </select>
           </div>
 
-          {/* Location */}
-          <div className="sm:col-span-6">
-            <label
-              htmlFor="location"
-              className="block text-sm font-medium text-gray-900"
-            >
-              Location where the item was lost
+          <div>
+            <label className="block font-bold" htmlFor="location">
+              Location
             </label>
-            <div className="mt-2">
-              <input
-                id="location"
-                {...register("location")}
-                type="text"
-                required
-                placeholder="Enter the location"
-                className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-              />
-            </div>
+            <input
+              id="location"
+              {...register("location")}
+              type="text"
+              required
+              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+            />
           </div>
 
-          {/* Date Lost */}
-          <div className="sm:col-span-3">
-            <label
-              htmlFor="date-lost"
-              className="block text-sm font-medium text-gray-900"
-            >
-              Date Lost
+          <div>
+            <label className="block font-bold" htmlFor="date-lost">
+              Date Lost/Found
             </label>
-            <div className="mt-2">
+            <div className="">
               <DatePicker
                 selected={LostOrFoundDate}
-                onChange={(date) => setLostOrFoundDate(date)}
-                className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                onChange={setLostOrFoundDate}
+                className="    w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
               />
             </div>
           </div>
 
-          {/* Contact Information */}
-          <div className="sm:col-span-6">
-            <label
-              htmlFor="contact-info"
-              className="block text-sm font-medium text-gray-900"
-            >
-              Contact Information
-            </label>
-            <div className="grid md:grid-cols-2 gap-3">
-              <div className="mt-2">
-                <input
-                  id="name"
-                  {...register("name")}
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  readOnly
-                  placeholder="Your fullname"
-                  className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-                />
-              </div>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  {...register("email")}
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  readOnly
-                  placeholder="Your email"
-                  className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex w-full border sm:col-span-6">
-            <Button1 className={"w-full block"}> Add Post </Button1>
-          </div>
-        </form>
+          <Button1 className="w-full">Add Post</Button1>
+        </form>{" "}
+        <img
+          src={addPost}
+          className="lg:h-[500px] md:h-[300px]  mx-auto my-auto"
+          alt=""
+        />
       </div>
     </div>
   );
