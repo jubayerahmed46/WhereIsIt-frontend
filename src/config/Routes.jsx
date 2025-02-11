@@ -16,6 +16,7 @@ import {
   EditPost,
 } from ".";
 import AllReviews from "../pages/all-review/AllReviews";
+import Contact from "../pages/contact/Contact";
 import PageNotFound from "../pages/not-found/PageNotFound";
 
 function Router() {
@@ -39,6 +40,7 @@ function Router() {
             ></Route>
           </Route>
           <Route path="reviews" element={<AllReviews />}></Route>
+          <Route path="contact" element={<Contact />}></Route>
 
           <Route element={<PrivetRoute />}>
             <Route path="postsDetails/:id" element={<PostDefails />} />

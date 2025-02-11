@@ -5,9 +5,8 @@ import { TbGridDots } from "react-icons/tb";
 import { MdTableRows } from "react-icons/md";
 import { Link } from "react-router";
 import Pagination from "./Pagination";
-import Spinner from "../spinner/Spinner";
+import Spinner2 from "../spinner/Spinner2";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
-import CircularProgress from "@mui/material/CircularProgress";
 
 function getLayout() {
   let lay = localStorage.getItem("layout");
@@ -53,11 +52,11 @@ function LostAndFoundItems() {
   };
 
   if (loader) {
-    return <Spinner />;
+    // return <Spinner2 />;
   }
 
   return (
-    <div className=" mx-auto max-w-7xl lg:px-9 md:px-5 px-3 mt-28">
+    <div className=" mx-auto max-w-7xl lg:px-9 md:px-5 px-3 md:mt-28 mt-24">
       <Helmet>
         <meta charSet="utf-8" />
         <title>All Lost and Found Post</title>
@@ -74,7 +73,7 @@ function LostAndFoundItems() {
                 onChange={handleSearch}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 ring-black/70"
               />
-              <CircularProgress />
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
@@ -117,7 +116,9 @@ function LostAndFoundItems() {
         </p>
         <hr className="mb-4" />
 
-        {noData ? (
+        {loader ? (
+          <Spinner2 />
+        ) : noData ? (
           <div className="text-center text-gray-700 text-xl py-12">
             {noData}
           </div>

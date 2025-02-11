@@ -6,7 +6,7 @@ import Reviews from "./Reviews";
 
 function Home() {
   return (
-    <div className="mt-20">
+    <div className="md:mt-20 mt-16">
       <Helmet>
         <meta charSet="utf-8" />
         <title>WhereIsIt | Home</title>

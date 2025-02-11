@@ -49,9 +49,10 @@ function NavBar() {
     { id: 23423, label: "Home", path: "/" },
     { id: 26423, label: "Lost & Found Items", path: "lost-and-found" },
     { id: 83423, label: " Our Reviews", path: "reviews" },
-    { id: 33423, label: "Post My Item", path: "add-item" },
+    { id: 33423, label: "Post Item", path: "add-item" },
     { id: 53423, label: " My Recoveries Items", path: "my-recovered-posts" },
     { id: 363423, label: " Manage My Items", path: "manage-my-posts" },
+    { id: 363423, label: " Contact Us", path: "contact" },
   ];
 
   return (
@@ -59,11 +60,11 @@ function NavBar() {
       // className={` text-white py-2 z-50 transition-all duration-500 ${
       //   hidden ? "relative w-full  -top-24" : "fixed w-full  top-0"
       // }`}
-      className={`fixed top-0 w-full  transition-transform duration-300 z-50 text-white ${
+      className={`fixed top-0 w-full   transition-transform duration-300 z-50 text-white  md:py-0 ${
         hidden ? "-translate-y-full" : "translate-y-0 bg-[#003366] "
       } `}
     >
-      <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
+      <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3 md:py-0 py-4">
         <div>
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-between  w-full">

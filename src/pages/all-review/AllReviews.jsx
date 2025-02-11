@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import ReviewCard from "../../components/ReviewCard";
-import Spinner from "../spinner/Spinner";
+import Spinner2 from "../spinner/Spinner2";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import { toast } from "react-hot-toast";
+import Heading from "../../components/sectionHeading/Heading";
 
 function AllReviews() {
   const [reviews, setReviews] = useState([]);
@@ -22,18 +23,17 @@ function AllReviews() {
     })();
   }, [instance]);
 
-  if (loader) {
-    return <Spinner />;
-  }
+  // if (loader) {
+  //   return <Spinner2 />;
+  // }
 
   return (
     <div>
-      <div className="container mx-auto  ">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 my-5 mt-12 ">
-          Our All Reviews
-        </h2>
+      <div className="   md:mt-28 mt-24  mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
+        <Heading>Out All Reviews</Heading>
+
         {loader ? (
-          <Spinner />
+          <Spinner2 />
         ) : (
           <div className="grid lg:grid-cols-3 sm:grid-cols-2">
             {reviews.map((review, i) => (
