@@ -27,11 +27,11 @@ export default function Reviews() {
   }
 
   return (
-    <div className="">
-      <h2 className="text-3xl font-bold tracking-tight text-gray-900 my-5 mt-12 ">
+    <div className="mb-11">
+      <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white/90 my-5 mt-12 ">
         Our Reviews
       </h2>
-      <div className="border rounded-md px-2 shadow-sm py-5 bg-white">
+      <div className="border rounded-md px-2 shadow-sm py-5  dark:border-gray-600">
         <ReviewSlider reviews={reviews} />
         <div className="flex justify-center gap-5 mt-10">
           <Link to={"/reviews"}>

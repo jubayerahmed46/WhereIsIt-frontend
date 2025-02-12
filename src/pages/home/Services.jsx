@@ -53,16 +53,11 @@ const industries = [
 
 const Services = () => {
   return (
-    <div className="pt-10 bg-gray-100 mt-12">
+    <div className="pt-10 bg-gray-100 dark:bg-black mt-12">
       <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
-        <motion.h2
-          className="text-3xl font-bold ml-5 tracking-tight text-gray-900 mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        <h2 className="text-3xl font-bold ml-5 tracking-tight dark:text-white/90 mb-8">
           Industries Serviced
-        </motion.h2>
+        </h2>
         <motion.div
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 p-6"
           initial="hidden"
@@ -79,7 +74,7 @@ const Services = () => {
           {industries.map((industry) => (
             <motion.div
               key={industry.name}
-              className="flex flex-col items-center bg-white p-4 rounded-lg shadow-sm transition-shadow duration-300"
+              className="flex flex-col items-center bg-white dark:shadow-md dark:bg-gray-900 p-4 rounded-lg shadow-sm transition-shadow duration-300"
               whileHover={{ scale: 1.01 }}
               variants={{
                 hidden: { opacity: 0, y: 20 },
@@ -91,7 +86,7 @@ const Services = () => {
                 alt={industry.name}
                 className="md:h-24 h-20 mb-4"
               />
-              <p className="mt-2 text-center text-sm font-medium text-gray-700">
+              <p className="mt-2 text-center text-sm font-medium text-gray-700  dark:text-white/80">
                 {industry.name}
               </p>
             </motion.div>

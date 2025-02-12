@@ -4,7 +4,7 @@ import { PiArrowRightFill } from "react-icons/pi";
 /* eslint-disable react/prop-types */
 function PostCard({ post }) {
   return (
-    <div className="flex flex-col justify-between h-full">
+    <div className="flex flex-col justify-between h-full border-2 p-4 dark:border-gray-500 rounded-md">
       <div className="">
         <div className=" object-contain w-full rounded-sm  flex justify-center items-center">
           <img
@@ -33,7 +33,7 @@ function PostCard({ post }) {
         <Link to={`/postsDetails/${post._id}`}>
           <button
             className={
-              "mt-1 bg-transparent text-sm font-semibold   flex items-center gap-1 text-[#003366]   transition-all duration-200"
+              "mt-1 bg-transparent text-sm font-semibold   flex items-center gap-1 text-[#003366] dark:text-white/80   transition-all duration-200"
             }
           >
             View More <PiArrowRightFill />

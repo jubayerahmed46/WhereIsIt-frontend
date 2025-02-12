@@ -35,7 +35,7 @@ function AllRecoveredPage() {
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto md:mt-28 mt-24">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Recovered Posts</title>

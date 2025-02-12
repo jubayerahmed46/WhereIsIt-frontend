@@ -3,6 +3,7 @@ import LatestLostAndFound from "./LatestLostAndFound";
 import { Helmet } from "react-helmet-async";
 import Services from "./Services";
 import Reviews from "./Reviews";
+import HowItWorks from "./HowItWorks";
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
       </div>
       <Services />
       <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
+        <HowItWorks />
         <Reviews />
       </div>
     </div>

@@ -68,22 +68,21 @@ export default function AddItem() {
   };
 
   return (
-    <div className="mt-28  mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
+    <div className="mt-28 mx-auto max-w-7xl lg:px-9 md:px-5 px-3 text-gray-900 dark:text-white">
       <Helmet>
         <title>Add New Post</title>
       </Helmet>
       <div>
         <Heading>Post for Lost or Found Item</Heading>
-
         <p className="mb-7 -mt-4 font-medium text-sm">
           Provide details to help identify the lost or found item.
         </p>
       </div>
 
-      <div className="mb-16   flex lg:gap-24 gap-14  lg:flex-row flex-col">
+      <div className="mb-16 flex lg:gap-24 gap-14 lg:flex-row flex-col">
         <form
           onSubmit={handleSubmit(handleAddItems)}
-          className="space-y-4 w-full bg-[#00336617] md:p-6  p-3"
+          className="space-y-4 w-full bg-gray-100 dark:bg-gray-900 p-6 rounded-lg shadow-md"
         >
           <div>
             <label className="block font-bold text-lg mb-1" htmlFor="title">
@@ -94,7 +93,7 @@ export default function AddItem() {
               {...register("title")}
               type="text"
               required
-              className="w-full border rounded-sm p-2 focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
             />
           </div>
 
@@ -106,7 +105,7 @@ export default function AddItem() {
               {...register("postType")}
               id="post-type"
               required
-              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
             >
               <option disabled>Select Post Type</option>
               <option value="lost">Lost</option>
@@ -123,7 +122,7 @@ export default function AddItem() {
               {...register("thumbnail")}
               type="text"
               required
-              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
             />
           </div>
 
@@ -138,7 +137,7 @@ export default function AddItem() {
               id="description"
               {...register("description")}
               required
-              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
               rows="4"
             ></textarea>
           </div>
@@ -150,7 +149,7 @@ export default function AddItem() {
             <select
               id="category"
               {...register("category")}
-              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
             >
               <option value="" disabled>
                 Select Category
@@ -172,7 +171,7 @@ export default function AddItem() {
               {...register("location")}
               type="text"
               required
-              className="w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
+              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
             />
           </div>
 
@@ -180,20 +179,19 @@ export default function AddItem() {
             <label className="block font-bold" htmlFor="date-lost">
               Date Lost/Found
             </label>
-            <div className="">
-              <DatePicker
-                selected={LostOrFoundDate}
-                onChange={setLostOrFoundDate}
-                className="    w-full border rounded-sm p-2  focus:shadow-md  focus:shadow-[#cc000022] focus:outline-none "
-              />
-            </div>
+            <DatePicker
+              selected={LostOrFoundDate}
+              onChange={setLostOrFoundDate}
+              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
+            />
           </div>
 
           <Button1 className="w-full">Add Post</Button1>
-        </form>{" "}
+        </form>
+
         <img
           src={addPost}
-          className="lg:h-[500px] md:h-[300px]  mx-auto my-auto"
+          className="lg:h-[500px] md:h-[300px] mx-auto my-auto"
           alt=""
         />
       </div>

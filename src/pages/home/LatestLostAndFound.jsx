@@ -33,15 +33,12 @@ export default function LatestLostAndFound() {
         },
       }}
     >
-      <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">
+      <h2 className="text-3xl font-bold tracking-tight dark:text-white/95 mb-4">
         Latest Lost and Found Items
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {posts.map((post) => (
-          <div
-            key={post._id}
-            className="group relative border-2 p-4 rounded-lg  bg-white  transition-shadow "
-          >
+          <div key={post._id}>
             <PostCard post={post} />
           </div>
         ))}

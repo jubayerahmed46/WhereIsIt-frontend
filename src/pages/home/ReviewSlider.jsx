@@ -25,7 +25,7 @@ function ReviewSlider({ reviews }) {
     return <h2>Not Revies Availible!</h2>;
   }
   return (
-    <div className="slider-container relative">
+    <div className="slider-container relative ">
       <Slider {...settings}>
         {reviews.map((review, i) => (
           <ReviewCard review={review} key={i} />

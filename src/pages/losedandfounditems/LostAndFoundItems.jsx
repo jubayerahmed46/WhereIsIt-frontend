@@ -62,7 +62,7 @@ function LostAndFoundItems() {
         <meta charSet="utf-8" />
         <title>All Lost and Found Post</title>
       </Helmet>
-      <div className="border-2  rounded-md p-4 mb-8">
+      <div className="border-2  rounded-md p-4 mb-8 dark:border-gray-600">
         <div className="flex flex-wrap justify-between items-center">
           {/* Search Input */}
           <div className="w-full sm:w-1/2">
@@ -72,7 +72,7 @@ function LostAndFoundItems() {
                 placeholder="Search"
                 value={searchText}
                 onChange={handleSearch}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 ring-black/70"
+                className="dark:bg-transparent w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 ring-black/70"
               />
 
               <svg
@@ -95,7 +95,7 @@ function LostAndFoundItems() {
             <span className="text-sm text-gray-700 mr-4">Change Layout</span>
             <button
               onClick={() => setLayout((prev) => !prev)}
-              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200"
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-700"
             >
               {layout ? (
                 <MdTableRows className="text-xl" />
@@ -109,7 +109,7 @@ function LostAndFoundItems() {
                 toast("Sorted By Latest Items");
               }}
               title="Sort Latest Items"
-              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 ml-3"
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 ml-3 dark:bg-gray-700"
             >
               <span>
                 <ImSortAmountDesc className="text-xl" />
@@ -121,7 +121,7 @@ function LostAndFoundItems() {
 
       {/* Posts Section */}
       <div>
-        <h2 className="text-2xl font-semibold mb-2 text-gray-900">
+        <h2 className="text-2xl font-semibold mb-2  dark:text-white/90">
           Browse All Lost and Found Posts
         </h2>
         <p className="text-sm text-gray-500 mb-4">
@@ -140,10 +140,7 @@ function LostAndFoundItems() {
             {layout ? (
               <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 mt-8">
                 {allPost.map((post) => (
-                  <div
-                    key={post._id}
-                    className="group relative  hover:shadow-sm p-4 rounded-lg  border-2 duration-300"
-                  >
+                  <div key={post._id}>
                     <PostCard post={post} />
                   </div>
                 ))}
