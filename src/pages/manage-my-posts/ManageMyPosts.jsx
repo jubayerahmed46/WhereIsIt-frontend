@@ -88,7 +88,7 @@ function ManageMyPosts() {
     );
   }
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto md:mt-28 mt-24">
       <table className="table">
         {/* head */}
         <thead>
