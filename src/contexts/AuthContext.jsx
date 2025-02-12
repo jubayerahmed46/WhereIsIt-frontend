@@ -26,18 +26,14 @@ function AuthProvider({ children }) {
       const token = document.cookie;
       if (currentUser) {
         if (!token) {
-          // console.log(
           //   "login and create access token. user :",
           //   currentUser.email
           // );
           const user = { email: currentUser.email };
-          instance.post(`/create-jwt`, user).then((res) => {
-            console.log(res.data);
-          });
+          instance.post(`/create-jwt`, user);
         }
       } else {
         if (token) {
-          // console.log("logout and remove access token");
           instance.post(`/remove-jwt`, {});
         }
       }

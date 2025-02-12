@@ -6,7 +6,9 @@ import { MdTableRows } from "react-icons/md";
 import { Link } from "react-router";
 import Pagination from "./Pagination";
 import Spinner2 from "../spinner/Spinner2";
-import useAxiosInstance from "../../hooks/useAxiosInstance";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { ImSortAmountDesc } from "react-icons/im";
+import toast from "react-hot-toast";
 
 function getLayout() {
   let lay = localStorage.getItem("layout");
@@ -24,7 +26,8 @@ function LostAndFoundItems() {
   });
   const [loader, setLoader] = useState(true);
   const [noData, setNoData] = useState("");
-  const instance = useAxiosInstance();
+  const instance = useAxiosPublic();
+  const [isSort, setIsSort] = useState("");
 
   useEffect(() => {
     localStorage.setItem("layout", JSON.stringify(layout));
@@ -34,7 +37,9 @@ function LostAndFoundItems() {
     setNoData("");
     (async function () {
       try {
-        const { data } = await instance.get(`/posts?searchText=${searchText}`);
+        const { data } = await instance.get(
+          `/posts?searchText=${searchText}&isSort=${isSort}`
+        );
         setAllPost(data);
       } catch (error) {
         setNoData(error.response?.data?.message);
@@ -42,7 +47,7 @@ function LostAndFoundItems() {
         setLoader(false);
       }
     })();
-  }, [searchText, instance]);
+  }, [searchText, instance, isSort]);
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
@@ -50,10 +55,6 @@ function LostAndFoundItems() {
   const handleOnpaginationLoadDate = (posts) => {
     setAllPost(posts);
   };
-
-  if (loader) {
-    // return <Spinner2 />;
-  }
 
   return (
     <div className=" mx-auto max-w-7xl lg:px-9 md:px-5 px-3 md:mt-28 mt-24">
@@ -102,6 +103,18 @@ function LostAndFoundItems() {
                 <TbGridDots className="text-xl" />
               )}
             </button>
+            <button
+              onClick={() => {
+                setIsSort(true);
+                toast("Sorted By Latest Items");
+              }}
+              title="Sort Latest Items"
+              className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 ml-3"
+            >
+              <span>
+                <ImSortAmountDesc className="text-xl" />
+              </span>
+            </button>
           </div>
         </div>
       </div>
@@ -129,7 +142,7 @@ function LostAndFoundItems() {
                 {allPost.map((post) => (
                   <div
                     key={post._id}
-                    className="group relative border p-4 rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow duration-300"
+                    className="group relative  hover:shadow-sm p-4 rounded-lg  border-2 duration-300"
                   >
                     <PostCard post={post} />
                   </div>

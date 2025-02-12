@@ -4,13 +4,13 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import useAxiosInstance from "../../hooks/useAxiosInstance";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 function Pagination({ handleOnpaginationLoadDate }) {
   const [totalPost, setTotalPost] = useState(0);
   const postPerPage = 6;
   const [currentPage, setCurrentPage] = useState(0);
-  const instance = useAxiosInstance();
+  const instance = useAxiosPublic();
 
   const pageCount = Math.ceil(totalPost / postPerPage);
   useEffect(() => {
@@ -18,8 +18,8 @@ function Pagination({ handleOnpaginationLoadDate }) {
       try {
         const { data } = await instance.get(`/total-post-count`);
         setTotalPost(data.count);
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        return;
       }
     })();
   }, [instance]);
@@ -31,8 +31,8 @@ function Pagination({ handleOnpaginationLoadDate }) {
           `/posts?page=${currentPage}&size=${postPerPage}`
         );
         handleOnpaginationLoadDate(data);
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        return;
       }
     })();
   }, [currentPage, instance]);

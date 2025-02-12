@@ -38,7 +38,7 @@ function LogoutUser() {
       onClick={handleLogout}
       className={" bg-white text-black hover:bg-white/90"}
     >
-      <HiOutlineLogout className="text-xl" />
+      <HiOutlineLogout className="text-xl text-black" />
     </Button1>
   );
 }

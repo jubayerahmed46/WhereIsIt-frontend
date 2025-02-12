@@ -6,25 +6,25 @@ import ReviewSlider from "./ReviewSlider";
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import ReviewModal from "./ReviewModal";
-import { useEffect, useState } from "react";
-import useAxiosInstance from "../../hooks/useAxiosInstance";
-import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Spinner2 from "../spinner/Spinner2";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Reviews() {
   const { user } = useAuth();
-  const [reviews, setReviews] = useState([]);
-  const instance = useAxiosInstance();
+  const instance = useAxiosPublic();
 
-  useEffect(() => {
-    (async function fetchPosts() {
-      try {
-        const { data } = await instance.get("/reviews");
-        setReviews(data);
-      } catch (err) {
-        toast.error("Error fetching posts:", err.message);
-      }
-    })();
-  }, [instance]);
+  const { data: reviews = [], isLoading } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: async () => {
+      const { data } = await instance.get("/reviews");
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <Spinner2 />;
+  }
 
   return (
     <div className="">

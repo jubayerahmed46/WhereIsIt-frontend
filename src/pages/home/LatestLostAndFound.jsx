@@ -1,31 +1,23 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 import PostCard from "./PostCard";
-import Button1 from "../../components/common/btns/Button1";
-import Spinner from "../spinner/Spinner";
-import useAxiosInstance from "../../hooks/useAxiosInstance";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Spinner2 from "../spinner/Spinner2";
 
 export default function LatestLostAndFound() {
-  const [posts, setPosts] = useState([]);
-  const [loader, setLoader] = useState(true);
-  const instance = useAxiosInstance();
+  const instance = useAxiosPublic();
 
-  useEffect(() => {
-    (async function fetchPosts() {
-      try {
-        const { data } = await instance.get("/posts?searchText=latest");
-        setPosts(data);
-      } catch (err) {
-        console.error("Error fetching posts:", err.message);
-      } finally {
-        setLoader(false);
-      }
-    })();
-  }, [instance]);
+  const { data: posts = [], isLoading } = useQuery({
+    queryKey: ["latestPosts"],
+    queryFn: async () => {
+      const { data } = await instance.get("/posts?searchText=latest");
+      return data;
+    },
+  });
 
-  if (loader) {
-    return <Spinner />;
+  if (isLoading) {
+    return <Spinner2 />;
   }
 
   return (

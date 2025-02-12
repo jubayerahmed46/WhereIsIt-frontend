@@ -21,9 +21,11 @@ function PostCard({ post }) {
                 {post.title.split(" ")[2]}...
               </p>
             </h3>
+
             <p className="my-2 opacity-70 text-sm capitalize">
               {post.description.slice(0, 70)}...
             </p>
+            <p className="text-xs text-right opacity-60">{post.date} </p>
           </div>
         </div>
       </div>

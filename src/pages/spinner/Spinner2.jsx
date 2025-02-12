@@ -1,6 +1,6 @@
 import { CircularProgress } from "@mui/material";
 
-function Spinner() {
+function Spinner2() {
   return (
     <div className="min-h-96 flex justify-center items-center">
       <div>
@@ -10,4 +10,4 @@ function Spinner() {
   );
 }
 
-export default Spinner;
+export default Spinner2;

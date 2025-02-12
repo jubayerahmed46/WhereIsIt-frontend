@@ -63,7 +63,7 @@ export default function AddItem() {
       toast.success("Posted Successfully");
       navigate("/manage-my-posts");
     } catch (error) {
-      console.log(error.message);
+      return;
     }
   };
 

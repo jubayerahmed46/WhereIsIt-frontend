@@ -27,7 +27,7 @@ function ModalBox() {
   const { user } = useAuth();
   const instance = useAxiosInstance();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const reviewData = {
@@ -41,14 +41,8 @@ function ModalBox() {
       rating: rated,
     };
 
-    (async function () {
-      try {
-        await instance.post(`/reviews`, reviewData);
-        toast.success("Thank You for your Reviews");
-      } catch (error) {
-        console.log(error.message);
-      }
-    })();
+    await instance.post(`/reviews`, reviewData);
+    toast.success("Thank You for your Reviews");
   };
   return (
     <>

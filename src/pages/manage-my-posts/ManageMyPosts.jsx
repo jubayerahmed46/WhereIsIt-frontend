@@ -19,8 +19,6 @@ function ManageMyPosts() {
         try {
           const { data } = await instance.get(`/my-posts/${user.email}`);
           setMyPosts(data);
-        } catch (error) {
-          console.log(error.message);
         } finally {
           setLoader(false);
         }
@@ -39,7 +37,7 @@ function ManageMyPosts() {
           setMyPosts(filteredPosts);
         }
       } catch (error) {
-        console.log(error);
+        return;
       }
     };
 
