@@ -1,53 +1,23 @@
-/* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 
-function Pagination({ handleOnpaginationLoadDate }) {
-  const [totalPost, setTotalPost] = useState(0);
-  const postPerPage = 6;
-  const [currentPage, setCurrentPage] = useState(0);
-  const instance = useAxiosPublic();
-
+function Pagination({ currentPage, setCurrentPage, totalPost, postPerPage }) {
   const pageCount = Math.ceil(totalPost / postPerPage);
-  useEffect(() => {
-    (async function () {
-      try {
-        const { data } = await instance.get(`/total-post-count`);
-        setTotalPost(data.count);
-      } catch (err) {
-        return;
-      }
-    })();
-  }, [instance]);
 
-  useEffect(() => {
-    (async function () {
-      try {
-        const { data } = await instance.get(
-          `/posts?page=${currentPage}&size=${postPerPage}`
-        );
-        handleOnpaginationLoadDate(data);
-      } catch (err) {
-        return;
-      }
-    })();
-  }, [currentPage, instance]);
-
-  if (pageCount <= 1) {
-    return;
-  }
+  // if (pageCount <= 1) {
+  //   return null;
+  // }
+  console.log(pageCount);
 
   return (
-    <div className="border-t mt-12 py-4 flex justify-center  gap-3">
+    <div className="mt-16 py-4 flex justify-between items-center gap-3">
       <button
-        className="text-3xl px-3 bg-orange-500 py-1 rounded-md text-white"
+        className="text-2xl px-3 py-1 bg-[#003366] text-white rounded-tl-md rounded-bl-md"
         onClick={() => {
           if (currentPage === 0) {
-            setCurrentPage(() => pageCount - 1);
+            setCurrentPage(pageCount - 1);
           } else {
             setCurrentPage((prev) => prev - 1);
           }
@@ -55,29 +25,29 @@ function Pagination({ handleOnpaginationLoadDate }) {
       >
         <MdOutlineKeyboardArrowLeft />
       </button>
-      {[...Array(pageCount).keys()].map((pageNumber, i) => (
-        <button
-          onClick={() => {
-            setCurrentPage(() => pageNumber);
-          }}
-          className={`${
-            currentPage === pageNumber &&
-            "border-orange-300 text-white bg-orange-500"
-          } text-lg bg-gray-300  border-2 border-gray-400 w-10 aspect-square rounded-sm`}
-          key={i}
-        >
-          {pageNumber + 1}
-        </button>
-      ))}
+      <div className="flex gap-2">
+        {[...Array(pageCount).keys()].map((pageNumber) => (
+          <button
+            onClick={() => setCurrentPage(pageNumber)}
+            className={`${
+              currentPage === pageNumber &&
+              "bg-[#003366] text-white border border-[#003366] font-extrabold"
+            } text-sm font-bold border-2 dark:border-gray-600 w-7 aspect-square rounded-sm`}
+            key={pageNumber}
+          >
+            {pageNumber + 1}
+          </button>
+        ))}
+      </div>
       <button
         onClick={() => {
           if (currentPage === pageCount - 1) {
-            setCurrentPage(() => 0);
+            setCurrentPage(0);
           } else {
             setCurrentPage((prev) => prev + 1);
           }
         }}
-        className="text-3xl px-3 bg-orange-500  rounded-md text-white"
+        className="text-2xl px-3 py-1 rounded-br-md rounded-tr-md bg-[#003366] text-white"
       >
         <MdOutlineKeyboardArrowRight />
       </button>

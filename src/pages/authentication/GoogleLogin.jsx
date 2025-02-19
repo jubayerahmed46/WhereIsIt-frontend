@@ -31,12 +31,12 @@ function GoogleLogin() {
       });
   };
   return (
-    <Button1
+    <div
       onClick={handlerGoogleLogin}
-      className="mt-3 w-[70%] bg-orange-400 font-semibold mx-auto hover:bg-orange-300 text-white"
+      className="flex justify-center items-center gap-3 border rounded-md py-2 border-gray-400/40 mt-8 cursor-pointer shadow-md bg-black/5 dark:hover:bg-white/5"
     >
       Login with <span className="font-bold">Google</span>
-    </Button1>
+    </div>
   );
 }
 

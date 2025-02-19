@@ -8,6 +8,7 @@ import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet-async";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import toast from "react-hot-toast";
+import GoogleLogin from "./GoogleLogin";
 
 export default function Signup() {
   const { register, handleSubmit, reset } = useForm();
@@ -62,109 +63,117 @@ export default function Signup() {
           <meta charSet="utf-8" />
           <title>Auth | signup</title>
         </Helmet>
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Create a new Account
-          </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit(onSubmitData)} className="space-y-6">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Full Name
-              </label>
-              <div className="mt-2">
-                <input
-                  id="name"
-                  {...register("fullname")}
-                  type="text"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-              <label
-                htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Email address
-              </label>
-              <div>
-                <input
-                  id="email"
-                  {...register("email")}
-                  type="email"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-              <label
-                htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Photo URL
-              </label>
-              <div>
-                <input
-                  id="photoURL"
-                  {...register("photoURL")}
-                  type="url"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
+        <div>
+          <div className="border  border-black/30 dark:border-gray-400/45 py-4 rounded-md max-w-[450px]  mx-auto">
+            <div className="sm:mx-auto sm:w-full sm:max-w-sm flex justify-center flex-col ">
+              <h2 className=" text-center text-3xl font-bold">
+                Create New Account
+              </h2>
             </div>
 
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm/6 font-medium text-gray-900"
+            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+              <form onSubmit={handleSubmit(onSubmitData)} className="space-y-3">
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm/6 font-medium "
+                  >
+                    Full Name
+                  </label>
+                  <div>
+                    <input
+                      id="name"
+                      {...register("fullname")}
+                      type="text"
+                      required
+                      className="border-black/30 w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm/6 font-medium "
+                  >
+                    Email address
+                  </label>
+                  <div>
+                    <input
+                      id="email"
+                      {...register("email")}
+                      type="email"
+                      required
+                      className="border-black/30 w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm/6 font-medium "
+                  >
+                    Photo URL
+                  </label>
+                  <div>
+                    <input
+                      id="photoURL"
+                      {...register("photoURL")}
+                      type="url"
+                      required
+                      className="border-black/30 w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="password"
+                      className="block text-sm/6 font-medium"
+                    >
+                      Password
+                    </label>
+                  </div>
+                  <div className="relative">
+                    <input
+                      id="password"
+                      {...register("password")}
+                      type="password"
+                      required
+                      className="relative border-black/30 w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
+                    />
+                    <button
+                      type="button"
+                      className="text-xl absolute top-2 right-3"
+                      onClick={() => setIsVisible((prev) => !prev)}
+                    >
+                      {isVisible ? <IoMdEyeOff /> : <IoMdEye />}
+                    </button>
+                  </div>
+                  <p className="text-xs text-error mt-1">{passError} </p>
+                </div>
+
+                <div>
+                  <Button1 className="bg-[#003366] w-full text-white shadow-md font-semibold">
+                    Signup
+                  </Button1>
+                </div>
+              </form>
+              <GoogleLogin />
+              <p className="mt-10 text-center text-sm/6 text-gray-500 ">
+                New to this website
+                <Link
+                  to={"/auth/login"}
+                  className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
-                  Password
-                </label>
-              </div>
-              <div>
-                <input
-                  id="password"
-                  {...register("password")}
-                  type="password"
-                  required
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-                <button
-                  type="button"
-                  className="text-xl absolute top-2 right-3"
-                  onClick={() => setIsVisible((prev) => !prev)}
-                >
-                  {isVisible ? <IoMdEyeOff /> : <IoMdEye />}
-                </button>
-              </div>
-              <p className="text-xs text-error mt-1">{passError} </p>
+                  <span className="ml-2 hover:underline">
+                    {" "}
+                    Already have an Account
+                  </span>
+                </Link>
+              </p>
             </div>
-
-            <div>
-              <Button1 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                SignUp
-              </Button1>
-            </div>
-          </form>
-
-          <p className="mt-10 text-center text-sm/6 text-gray-500 ">
-            New to this website
-            <Link
-              to={"/auth/login"}
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
-            >
-              <span className="ml-2 hover:underline">
-                {" "}
-                Already have an Account
-              </span>
-            </Link>
-          </p>
+          </div>
         </div>
       </div>
     </>

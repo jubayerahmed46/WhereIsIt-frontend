@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 
 function ReviewCard({ review }) {
   return (
-    <div className="shadow-sm rounded-lg p-4 m-4 border dark:border-gray-600">
+    <div className="shadow-sm rounded-lg p-4 mx-2 border dark:border-gray-600/50">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-2 font-bold text-blue-gray-500">
           {[...Array(review.rating)].map((rev, i) => (
@@ -14,7 +14,7 @@ function ReviewCard({ review }) {
         </div>
         <div className="text-gray-500">{review.date} </div>
       </div>
-      <p className="text-gray-700 text-sm mb-6 dark:text-white/80">
+      <p className="text-gray-700 text-sm mb-6  dark:text-gray-500">
         {review.description}
       </p>
       <div className="flex items-center gap-5">

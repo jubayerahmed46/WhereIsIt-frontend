@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionHeading from "../../components/SectionHeading";
 
 const industries = [
   {
@@ -53,45 +54,31 @@ const industries = [
 
 const Services = () => {
   return (
-    <div className="pt-10 bg-gray-100 dark:bg-black mt-12">
+    <div className=" mt-16">
       <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
-        <h2 className="text-3xl font-bold ml-5 tracking-tight dark:text-white/90 mb-8">
-          Industries Serviced
-        </h2>
-        <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8 p-6"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0, scale: 0.9 },
-            visible: {
-              opacity: 1,
-              scale: 1,
-              transition: { staggerChildren: 0.2 },
-            },
-          }}
-        >
+        <SectionHeading>Industries Serviced</SectionHeading>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
           {industries.map((industry) => (
             <motion.div
               key={industry.name}
-              className="flex flex-col items-center bg-white dark:shadow-md dark:bg-gray-900 p-4 rounded-lg shadow-sm transition-shadow duration-300"
+              className="flex flex-col items-center bg-white dark:shadow-md dark:bg-gray-900/20 py-4 px-2  rounded-lg border dark:border-gray-600/50 transition-shadow duration-300"
               whileHover={{ scale: 1.01 }}
               variants={{
-                hidden: { opacity: 0, y: 20 },
+                hidden: { opacity: 0, y: 10 },
                 visible: { opacity: 1, y: 0 },
               }}
             >
               <img
                 src={industry.img}
                 alt={industry.name}
-                className="md:h-24 h-20 mb-4"
+                className="md:h-20 sm:h-16 h-12 mb-2"
               />
-              <p className="mt-2 text-center text-sm font-medium text-gray-700  dark:text-white/80">
+              <p className=" text-center text-sm font-medium text-gray-700  dark:text-white/80">
                 {industry.name}
               </p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

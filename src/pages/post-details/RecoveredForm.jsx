@@ -7,7 +7,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
 
-function RecoveredForm({ itemName, id, handleRecover }) {
+function RecoveredForm({ itemName, id, refetch }) {
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
   const [location, setLocation] = useState("");
@@ -35,10 +35,12 @@ function RecoveredForm({ itemName, id, handleRecover }) {
 
     (async function () {
       try {
-        handleRecover();
         await instance.post(`/recoveries`, recoveryItem);
       } finally {
+        setLocation("");
+        setStartDate(new Date());
         toast.success("Thank you for submitting");
+        refetch();
       }
     })();
   };
@@ -47,26 +49,26 @@ function RecoveredForm({ itemName, id, handleRecover }) {
     <div className="relative">
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal" role="dialog">
-        <div className="modal-box">
+        <div className="modal-box  dark:bg-[#101010] dark:text-white rounded-md">
           <label
             htmlFor="my_modal_6"
-            className="text-3xl rounded-full font-bold text-orange-400 absolute top-4 hover:font-extrabold cursor-pointer right-4 hover:scale-95 transition duration-75"
+            className="text-3xl rounded-full font-bold dark:text-white text-black absolute top-4 hover:font-extrabold cursor-pointer right-4 hover:scale-95 transition duration-75"
           >
             <IoCloseSharp />
           </label>
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <h2 className="mb-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                Please fill up the following fields
+              <h2 className=" text-center text-2xl/9 font-bold tracking-tight dark:text-white/90 mb-5">
+                Recover Item
               </h2>
             </div>
 
             <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-3">
                 <div>
                   <label
                     htmlFor="location"
-                    className="block text-sm/6 font-medium text-gray-900"
+                    className="block text-sm font-medium  dark:text-white/85"
                   >
                     Where was that given (location name)
                   </label>
@@ -79,7 +81,7 @@ function RecoveredForm({ itemName, id, handleRecover }) {
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
                       autoComplete="location"
-                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      className="border dark:border-gray-400/40 border-black/30 w-full rounded-md outline-none dark:bg-black/65 py-2 px-3 dark:text-gray-400 dark:focus:ring-1 dark:ring-white/20 focus:ring-1 ring-black/65 "
                     />
                   </div>
                   <p className="text-xs my-1 texterr">{locatonError} </p>
@@ -88,92 +90,21 @@ function RecoveredForm({ itemName, id, handleRecover }) {
                 <div>
                   <label
                     htmlFor="date"
-                    className="block text-sm/6 font-medium text-gray-900"
+                    className="block text-sm font-medium  dark:text-white/85 text-center"
                   >
                     When was that given (Date)
                   </label>
-                  <div className="mt-2 w-full flex ">
+                  <div className="mt-2 w-full flex  justify-center">
                     <DatePicker
-                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      className="dark:border-gray-400/40 border-black/30 border border-black w-full rounded-md outline-none dark:bg-black/65 py-2 px-3 dark:text-gray-400 dark:focus:ring-1 dark:ring-white/20 focus:ring-1 ring-black/65"
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                     />
                   </div>
                 </div>
-
-                <div className="space-y-4">
-                  <h2>Your Information </h2>
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm/6 font-medium text-gray-900"
-                    >
-                      Your Name
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        readOnly
-                        defaultValue={user.displayName}
-                        required
-                        autoComplete="name"
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm/6 font-medium text-gray-900"
-                    >
-                      Your Email
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        readOnly
-                        defaultValue={user.email}
-                        required
-                        autoComplete="email"
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="imageURL"
-                      className="block text-sm/6 font-medium text-gray-900"
-                    >
-                      Profile imageURL
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        id="imageURL"
-                        name="imageURL"
-                        type="url"
-                        readOnly
-                        required
-                        defaultValue={user.photoURL}
-                        autoComplete="imageURL"
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                      />
-                    </div>
-                  </div>
-                  <Button1 className="modal-action grid grid-cols-1 w-full ">
-                    {location ? (
-                      <label
-                        className="relative cursor-pointer "
-                        htmlFor="my_modal_6"
-                      >
-                        Submit
-                      </label>
-                    ) : (
-                      "Submit"
-                    )}
+                <div className=" flex justify-center">
+                  <Button1 className=" bg-[#003366] hover:bg-[#003366cf] mt-4 px-3 text-white  w-full ">
+                    Submit
                   </Button1>
                 </div>
               </form>

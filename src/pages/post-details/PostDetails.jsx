@@ -6,32 +6,31 @@ import Button1 from "../../components/common/btns/Button1";
 import RecoveredForm from "./RecoveredForm";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import Spinner from "../spinner/Spinner";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../hooks/useAuth";
 
 export default function PostDetails() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const instance = useAxiosInstance();
+  const { user } = useAuth();
 
-  const [post, setPost] = useState({});
-  const [recovered, setRecovered] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [post, setPost] = useState({});
+  // const [recovered, setRecovered] = useState(false);
+  // const [loading, setLoading] = useState(true);
 
-  // Fetch Post Details
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const { data } = await instance.get(`/posts/${id}`);
-        setPost(data);
-      } catch (error) {
-        console.error("Error fetching post:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPost();
-  }, [id, recovered, instance]);
+  const {
+    data: post = {},
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["my-posts"],
+    queryFn: async () => {
+      const { data } = await instance.get(`/posts/${id}`);
+      return data;
+    },
+  });
 
-  if (loading) {
+  if (isLoading) {
     return <Spinner />;
   }
 
@@ -41,21 +40,7 @@ export default function PostDetails() {
         <title>Post Details | {post.title || "Loading..."}</title>
       </Helmet>
 
-      {/* Back Button */}
       <div className="pt-6">
-        <Button1 onClick={() => navigate(-1)} className="mb-4">
-          Back
-        </Button1>
-
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb">
-          <ol className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            <li className="text-sm font-medium text-gray-500 hover:text-gray-600">
-              {post.name}
-            </li>
-          </ol>
-        </nav>
-
         {/* Post Details */}
         <div className="mx-auto mt-6 flex flex-col md:flex-row gap-6">
           {/* Image Section */}
@@ -65,62 +50,74 @@ export default function PostDetails() {
               src={post.thumbnail}
               className="rounded-lg object-cover w-full md:h-[400px] h-64"
             />
+            <h1 className="text-2xl font-bold tracking-tight dark:text-white/95 sm:text-3xl mt-8">
+              {post.title}
+            </h1>
+            <p className="text-base  mt-2 text-gray-500">{post.description}</p>
           </div>
 
           {/* Information Section */}
           <div className="md:w-1/2">
-            <h1 className="text-2xl font-bold tracking-tight dark:text-white/95 sm:text-3xl">
-              {post.title}
-            </h1>
-            <p className="text-base dark:text-white/95">{post.description}</p>
-
-            {/* Post Meta Info */}
-            <div className="mt-4 space-y-3">
-              <p className="text-base dark:text-white/95">
-                <strong>Category:</strong> {post.category}
-              </p>
-              <p className="text-base dark:text-white/95">
-                <strong>Location:</strong> {post.location}
-              </p>
-              <p className="text-base dark:text-white/95">
-                <strong>Reported by:</strong> {post.name}
-              </p>
-              <p className="text-base dark:text-white/95">
-                <strong>Email:</strong> {post.email}
-              </p>
-              <p className="text-base dark:text-white/95">
-                <strong>Date:</strong>{" "}
-                {post.date ? new Date(post.date).toLocaleDateString() : "N/A"}
-              </p>
-            </div>
-
-            {/* Action Button */}
-            <div className="mt-4">
-              {post.status === "recovered" ? (
-                <Button1 className="bg-blue-gray-800 text-white hover:bg-gray-800 h-auto">
-                  Recovered
-                </Button1>
-              ) : (
-                <label
-                  htmlFor="my_modal_6"
-                  className="h-auto bg-blue-600 text-white px-6 py-2 rounded-md text-base hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 cursor-pointer"
-                >
-                  {post?.postType?.toLowerCase() === "found"
-                    ? "This is Mine"
-                    : "Found This!"}
-                </label>
+            <table className=" border w-full  border-collapse   dark:border-gray-700/70  border-black/20">
+              <tr className="border-b   dark:border-gray-700/70  border-black/20 ">
+                <th className="border-black/20 text-left w-28 border-r border-white  p-2 py-2   dark:border-gray-700/70 ">
+                  Category
+                </th>
+                <td className="text-left  pl-3 ">{post.category}</td>
+              </tr>
+              <tr className="border-b   dark:border-gray-700/70  dark:bg-white/5 bg-gray-100 border-black/20 ">
+                <th className="border-black/20 text-left w-28 border-r border-white  p-2   dark:border-gray-700/70 py-2">
+                  Location
+                </th>
+                <td className="text-left  pl-3">{post.location}</td>
+              </tr>
+              <tr className="border-b   dark:border-gray-700/70   border-black/20 ">
+                <th className="text-left w-28 border-r border-white  p-2   dark:border-gray-700/70  border-black/20 py-2">
+                  Reported by
+                </th>
+                <td className="text-left  pl-3">{post.name}</td>
+              </tr>
+              <tr className="border-b   dark:border-gray-700/70  bg-gray-100  border-black/20 dark:bg-white/5">
+                <th className="text-left w-28 border-r border-white  p-2   dark:border-gray-700/70  border-black/20 py-2">
+                  Email
+                </th>
+                <td className="text-left  pl-3">{post.email}</td>
+              </tr>
+              <tr className="border-b   dark:border-gray-700/70  border-black/20">
+                <th className="text-left w-28 border-r border-white  p-2   dark:border-gray-700/70  border-black/20 py-2">
+                  Date
+                </th>
+                <td className="text-left  pl-3">{post.category}</td>
+              </tr>
+              {user.email !== post.email && (
+                <tr className="border-b   dark:border-gray-700/70   border-black/20">
+                  <td colSpan={2}>
+                    <div className="py-2 w-full my-1 flex   justify-center">
+                      {post.status === "recovered" ? (
+                        <Button1 className="bg-blue-gray-800 text-white hover:bg-gray-800  ">
+                          Recovered
+                        </Button1>
+                      ) : (
+                        <label
+                          htmlFor="my_modal_6"
+                          className="cursor-pointer mx-auto py-2 px-3 rounded-md  transition-all duration-300  bg-[#003366] text-white hover:bg-[#1a4979]"
+                        >
+                          {post?.postType?.toLowerCase() === "found"
+                            ? "This is Mine"
+                            : "Found This!"}
+                        </label>
+                      )}
+                    </div>
+                  </td>
+                </tr>
               )}
-            </div>
+            </table>
           </div>
         </div>
       </div>
 
       {/* Recovered Form */}
-      <RecoveredForm
-        itemName={post.title}
-        id={post._id}
-        handleRecover={() => setRecovered(true)}
-      />
+      <RecoveredForm itemName={post.title} id={post._id} refetch={refetch} />
     </div>
   );
 }

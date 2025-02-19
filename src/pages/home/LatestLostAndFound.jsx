@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import PostCard from "./PostCard";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Spinner2 from "../spinner/Spinner2";
+import SectionHeading from "../../components/SectionHeading";
 
 export default function LatestLostAndFound() {
   const instance = useAxiosPublic();
@@ -22,7 +23,7 @@ export default function LatestLostAndFound() {
 
   return (
     <motion.div
-      className="pt-8"
+      className=""
       initial="hidden"
       animate="visible"
       variants={{
@@ -33,9 +34,7 @@ export default function LatestLostAndFound() {
         },
       }}
     >
-      <h2 className="text-3xl font-bold tracking-tight dark:text-white/95 mb-4">
-        Latest Lost and Found Items
-      </h2>
+      <SectionHeading>Latest Found & Lost Posts</SectionHeading>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {posts.map((post) => (
           <div key={post._id}>

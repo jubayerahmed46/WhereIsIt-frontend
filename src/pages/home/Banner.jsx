@@ -1,3 +1,59 @@
+// import hero from "/public/hero.png";
+// import "./banner.css";
+// import Button1 from "../../components/common/btns/Button1";
+// import { Link } from "react-router";
+
+// function Banner() {
+//   return (
+//     <section className=" banner bg-[#1b8bfc4c] dark:bg-[#0e172173] -mt-6 md:py-24 py-14 md:pt-24  md:pb-20 pb-24 text-white ">
+//       <div className="flex  lg:gap-52 xl:gap-64  gap-10 lg:flex-row flex-col mx-auto max-w-7xl lg:px-9 md:px-5 px-3 lg:py-0 py-4">
+//         <div className="flex justify-center  flex-col lg:text-left text-center">
+//           <h1 className="text-4xl uppercase font-extrabold text-black dark:text-white/95">
+//             Report what you <br />
+//             Found or Lost
+//           </h1>
+//           <h3 className="text-2xl text-[#003366] font-bold mt-3 dark:text-blue-500">
+//             Lost or found something? <br /> Let us help you
+//           </h3>
+//           <div className="flex gap-3 mt-8  lg:justify-start justify-center">
+//             <Link to={"lost-and-found"}>
+//               <Button1
+//                 className={
+//                   "bg-[#003366] px-6 shadow-md text-lg uppercase  tracking-wide hover:bg-[#003366c5]"
+//                 }
+//               >
+//                 I Have Lost{" "}
+//               </Button1>
+//             </Link>
+//             <Link to={"lost-and-found"}>
+//               <Button1
+//                 className={
+//                   "bg-[#ffffff] hover:bg-[#ffffffd8] px-6 text-black shadow-md text-lg uppercase tracking-wide"
+//                 }
+//               >
+//                 I Have Found{" "}
+//               </Button1>
+//             </Link>
+//           </div>
+//           <div className="mt-3">
+//             <p className=" text-black dark:text-white/85">
+//               Want to know more? Please -{" "}
+//               <Link to={"contact"}>
+//                 <button className=" hover:text-blue-800">Contact</button>
+//               </Link>
+//             </p>
+//           </div>
+//         </div>
+//         <div className="flex justify-center">
+//           <img src={hero} alt="hero image" className="h-[400px]" />
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default Banner;
+
 import { Carousel } from "@material-tailwind/react";
 
 function Banner() {
@@ -17,9 +73,9 @@ function Banner() {
   ];
 
   return (
-    <div className="relative mt-7">
+    <div className="relative -mt-6">
       <Carousel
-        className=" 2xl:h-[550px] lg:h-[520px] md:h-[470px] h-[520px]"
+        className=" 2xl:h-[580px] lg:h-[560px]  md:h-[470px] h-[520px]"
         navigation={({ setActiveIndex, activeIndex, length }) => (
           <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
             {new Array(length).fill("").map((_, i) => (

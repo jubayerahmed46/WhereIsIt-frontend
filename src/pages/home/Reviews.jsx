@@ -9,6 +9,7 @@ import ReviewModal from "./ReviewModal";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Spinner2 from "../spinner/Spinner2";
 import { useQuery } from "@tanstack/react-query";
+import SectionHeading from "../../components/SectionHeading";
 
 export default function Reviews() {
   const { user } = useAuth();
@@ -27,20 +28,18 @@ export default function Reviews() {
   }
 
   return (
-    <div className="mb-11">
-      <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white/90 my-5 mt-12 ">
-        Our Reviews
-      </h2>
-      <div className="border rounded-md px-2 shadow-sm py-5  dark:border-gray-600">
+    <div className="mb-11 mt-20">
+      <SectionHeading className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white/90 my-5 mt-12 ">
+        What People Says About Us
+      </SectionHeading>
+      <div className=" px-2 shadow-sm py-5 ">
         <ReviewSlider reviews={reviews} />
-        <div className="flex justify-center gap-5 mt-10">
+        <div className="flex justify-center gap-5 mt-9">
           <Link to={"/reviews"}>
-            <Button1 className="bg-orange-500 hover:bg-orange-600 text-white">
-              View All
-            </Button1>
+            <Button1 className="bg-[#003366] text-white">View All</Button1>
           </Link>
           {user ? (
-            <Button1 className="bg-blue-500 hover:bg-blue-600 text-white flex justify-center items-center gap-1">
+            <Button1 className="bg-white shadow-sm text-black border flex justify-center items-center gap-1">
               <label
                 htmlFor="my_modal_6"
                 className="cursor-pointer flex items-center gap-2"
@@ -50,7 +49,7 @@ export default function Reviews() {
             </Button1>
           ) : (
             <Link to={"auth/login"}>
-              <Button1 className="bg-blue-500 hover:bg-blue-600 text-white flex justify-center items-center gap-1">
+              <Button1 className="bg-white shadow-md flex justify-center items-center gap-1 text-black">
                 Add Review <IoIosAddCircleOutline />
               </Button1>
             </Link>

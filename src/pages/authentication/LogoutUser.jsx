@@ -34,12 +34,12 @@ function LogoutUser() {
     ));
   };
   return (
-    <Button1
+    <button
       onClick={handleLogout}
-      className={" bg-white text-black hover:bg-white/90"}
+      className={" bg-white text-black hover:bg-white/90 py-1 px-2 rounded-sm"}
     >
-      <HiOutlineLogout className="text-xl text-black" />
-    </Button1>
+      <HiOutlineLogout className="text-lg text-black" />
+    </button>
   );
 }
 

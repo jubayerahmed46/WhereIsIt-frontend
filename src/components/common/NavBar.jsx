@@ -46,28 +46,27 @@ function NavBar() {
 
   const links = [
     { id: 23435423, label: "Home", path: "/" },
-    { id: 2645423, label: "Lost & Found Items", path: "lost-and-found" },
+    { id: 2645423, label: "Lost & Found", path: "lost-and-found" },
     { id: 83435423, label: " Our Reviews", path: "reviews" },
   ];
 
   if (user) {
     links.push(
-      { id: 3334423, label: "Post Item", path: "add-item" },
+      { id: 3334423, label: "New Post", path: "add-item" },
       {
         id: 5343423,
-        label: " My Recoveries Items",
+        label: " My Recoveries",
         path: "my-recovered-posts",
       },
       { id: 363345423, label: " Manage My Items", path: "manage-my-posts" }
     );
   }
-  links.push({ id: 3634233423, label: " Contact Us", path: "contact" });
 
   return (
     <nav
-      className={`fixed top-0 w-full   transition-transform duration-300 z-50 text-white  ${
+      className={`fixed top-0 w-full   transition-transform duration-300 z-50   text-white ${
         hidden ? "-translate-y-full" : "translate-y-0 bg-[#003366] "
-      } `}
+      }  `}
     >
       <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3 lg:py-0 py-4">
         <div>
@@ -87,11 +86,11 @@ function NavBar() {
                       key={link.id}
                       to={link.path}
                       className={({ isActive }) =>
-                        `rounded-md -tracking-wide py-8 transition-all duration-200 ${
+                        `rounded-md -tracking-wide  py-5 transition-all duration-200 ${
                           isActive
                             ? "text-[#FB8C00] hover:bg-[#cc0000] hover:text-white font-semibold"
                             : "hover:bg-[#cc0000] "
-                        } px-3 py-2 uppercase text-xs text-center rounded-none h-full `
+                        } px-2 py-1 uppercase text-xs text-center rounded-none h-full `
                       }
                     >
                       {link.label}
@@ -126,7 +125,13 @@ function NavBar() {
                       </>
                     ) : (
                       <Link to="auth/login">
-                        <Button1 className={"text-white"}>Login</Button1>
+                        <Button1
+                          className={
+                            "text-white border border-white/40 shadow-sm"
+                          }
+                        >
+                          Login
+                        </Button1>
                       </Link>
                     )}
                   </div>

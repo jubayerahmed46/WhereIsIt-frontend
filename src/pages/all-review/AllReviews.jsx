@@ -3,7 +3,7 @@ import ReviewCard from "../../components/ReviewCard";
 import Spinner2 from "../spinner/Spinner2";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import { toast } from "react-hot-toast";
-import Heading from "../../components/sectionHeading/Heading";
+import SectionHeading from "../../components/SectionHeading";
 
 function AllReviews() {
   const [reviews, setReviews] = useState([]);
@@ -23,19 +23,15 @@ function AllReviews() {
     })();
   }, [instance]);
 
-  // if (loader) {
-  //   return <Spinner2 />;
-  // }
-
   return (
     <div>
-      <div className="   md:mt-28 mt-24  mx-auto max-w-7xl lg:px-9 md:px-5 px-3">
-        <Heading>Out All Reviews</Heading>
+      <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3 mb-10">
+        <SectionHeading>Meet Out Best Users Review</SectionHeading>
 
         {loader ? (
           <Spinner2 />
         ) : (
-          <div className="grid lg:grid-cols-3 sm:grid-cols-2">
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-3">
             {reviews.map((review, i) => (
               <ReviewCard review={review} key={i} />
             ))}

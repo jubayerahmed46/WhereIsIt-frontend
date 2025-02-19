@@ -84,26 +84,22 @@ function EditPost() {
   }
 
   return (
-    <div className="isolate bg-white px-6 py-14 sm:py-20 lg:px-8">
+    <div className="isolate  px-6  py-10 lg:px-8">
       <div className="relative">
-        <Button1 onClick={() => navigate(-1)}>Back</Button1>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+          <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
             Edit Post
           </h2>
-          <p className="mt-2 text-lg/8 text-gray-600">
+          <p className="mt-2 text-lg/8 text-gray-600 mb-7">
             Update details of your {post.postType} item.
           </p>
           <form
             onSubmit={handleSubmit(handleUpdatePost)}
-            className="mx-auto mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+            className="space-y-6 w-full bg-[#00336618] dark:bg-gray-900/50 p-6 rounded-md shadow-md  text-left"
           >
             {/* Title */}
             <div className="sm:col-span-6">
-              <label
-                htmlFor="title"
-                className="block text-sm font-medium text-gray-900"
-              >
+              <label htmlFor="title" className="block text-sm font-medium ">
                 Title
               </label>
               <div className="mt-2">
@@ -113,17 +109,14 @@ function EditPost() {
                   type="text"
                   defaultValue={post.title}
                   placeholder="Enter the title of the item"
-                  className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600"
+                  className="w-full border  dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none  "
                 />
               </div>
             </div>
 
             {/* Post Type */}
             <div className="sm:col-span-3">
-              <label
-                htmlFor="post-type"
-                className="block text-sm font-medium text-gray-900"
-              >
+              <label htmlFor="post-type" className="block text-sm font-medium ">
                 Post Type
               </label>
               <div className="mt-2">
@@ -131,7 +124,7 @@ function EditPost() {
                   {...register("postType")}
                   id="post-type"
                   defaultValue={post?.postType}
-                  className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-indigo-600"
+                  className="w-full border  dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none  "
                 >
                   <option disabled>Select Post Type</option>
                   <option value="lost">Lost</option>
@@ -142,10 +135,7 @@ function EditPost() {
 
             {/* Thumbnail */}
             <div className="sm:col-span-3">
-              <label
-                htmlFor="thumbnail"
-                className="block text-sm font-medium text-gray-900"
-              >
+              <label htmlFor="thumbnail" className="block text-sm font-medium ">
                 Thumbnail (Image)
               </label>
               <div className="mt-2">
@@ -155,7 +145,7 @@ function EditPost() {
                   type="text"
                   defaultValue={post?.thumbnail}
                   placeholder="Image URL"
-                  className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-indigo-600"
+                  className="w-full border  dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none  "
                 />
               </div>
             </div>
@@ -164,7 +154,7 @@ function EditPost() {
             <div className="sm:col-span-6">
               <label
                 htmlFor="description"
-                className="block text-sm font-medium text-gray-900"
+                className="block text-sm font-medium "
               >
                 Description
               </label>
@@ -175,17 +165,14 @@ function EditPost() {
                   rows="4"
                   defaultValue={post.description}
                   placeholder="Provide a detailed description of the item"
-                  className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-indigo-600"
+                  className="w-full border  dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none  "
                 />
               </div>
             </div>
 
             {/* Category */}
             <div className="sm:col-span-3">
-              <label
-                htmlFor="category"
-                className="block text-sm font-medium text-gray-900"
-              >
+              <label htmlFor="category" className="block text-sm font-medium ">
                 Category
               </label>
               <div className="mt-2">
@@ -193,7 +180,7 @@ function EditPost() {
                   id="category"
                   defaultValue={post.category}
                   {...register("category")}
-                  className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-indigo-600"
+                  className="w-full border  dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none  "
                 >
                   <option value="" disabled>
                     Select Category
@@ -209,10 +196,7 @@ function EditPost() {
 
             {/* Location */}
             <div className="sm:col-span-6">
-              <label
-                htmlFor="location"
-                className="block text-sm font-medium text-gray-900"
-              >
+              <label htmlFor="location" className="block text-sm font-medium ">
                 Location
               </label>
               <div className="mt-2">
@@ -222,59 +206,27 @@ function EditPost() {
                   defaultValue={post.location}
                   type="text"
                   placeholder="Enter the location"
-                  className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-indigo-600"
+                  className="w-full border  dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none  "
                 />
               </div>
             </div>
 
             {/* Date Lost */}
             <div className="sm:col-span-3">
-              <label
-                htmlFor="date-lost"
-                className="block text-sm font-medium text-gray-900"
-              >
+              <label htmlFor="date-lost" className="block text-sm font-medium ">
                 Date Lost/Found
               </label>
               <div className="mt-2">
                 <DatePicker
                   selected={LostOrFoundDate}
                   onChange={(date) => setLostOrFoundDate(date)}
-                  className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 focus:outline-indigo-600"
+                  className="w-full border  dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none  "
                 />
               </div>
             </div>
 
-            {/* Contact Info */}
-            <div className="sm:col-span-6">
-              <label
-                htmlFor="contact-info"
-                className="block text-sm font-medium text-gray-900"
-              >
-                Contact Information
-              </label>
-              <div className="grid md:grid-cols-2 gap-3">
-                <div className="mt-2">
-                  <input
-                    id="name"
-                    type="text"
-                    value={user.displayName}
-                    readOnly
-                    className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 "
-                  />
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    type="text"
-                    value={user.email}
-                    readOnly
-                    className="block w-full rounded-md px-3 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 "
-                  />
-                </div>
-              </div>
-            </div>
             <div className="mt-10 sm:col-span-6">
-              <Button1 className="modal-action grid grid-cols-1 w-full hover:bg-blue-700">
+              <Button1 className="w-full bg-[#003366] text-white hover:bg-[#1a4979]">
                 Update Post
               </Button1>
             </div>

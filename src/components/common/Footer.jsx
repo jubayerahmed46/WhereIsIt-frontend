@@ -62,7 +62,12 @@ function Footer() {
             </a>
           </div>
           <p>Website problem? Please let us know!</p>
-          <p className="underline cursor-pointer">Contact us</p>
+          <Link to={"contact"}>
+            {" "}
+            <p className="underline cursor-pointer hover:opacity-80">
+              Contact us
+            </p>
+          </Link>
         </div>
 
         <div>

@@ -1,0 +1,11 @@
+@media only screen and (max-width: 600px) {
+  .banner {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 93%);
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .banner {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 84%);
+  }
+}

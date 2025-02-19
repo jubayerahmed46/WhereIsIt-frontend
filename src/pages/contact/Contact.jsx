@@ -13,7 +13,7 @@ const Contact = () => {
     }, 2000);
   };
   return (
-    <section className=" mx-auto max-w-7xl lg:px-9 md:px-5 px-3 my-8 mt-28 ">
+    <section className=" mx-auto max-w-7xl lg:px-9 md:px-5 px-3 mb-10">
       <Heading>Contact Us</Heading>
       <div className="">
         {!submit ? (

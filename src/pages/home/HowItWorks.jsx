@@ -1,3 +1,5 @@
+import SectionHeading from "../../components/SectionHeading";
+
 export default function HowItWorks() {
   const steps = [
     {
@@ -27,17 +29,19 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16">
-      <h2 className="text-3xl font-bold mb-8">How It Works</h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="max-w-7xl mx-auto px-6 mt-16 pb-24 z-20  dark:text-white/80">
+      <SectionHeading>How It Works</SectionHeading>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
         {steps.map((step, index) => (
           <div
             key={index}
-            className="p-6 border rounded-md  shadow-sm hover:shadow-md transition"
+            className="p-6 border rounded-md  shadow-sm hover:shadow-md  cursor-pointer dark:border-gray-700/70 dark:shadow-gray-900 md:text-left text-center"
           >
             <div className="text-4xl text-center">{step.icon}</div>
             <h3 className="text-xl font-semibold mt-4">{step.title}</h3>
-            <p className="text-gray-600 mt-2">{step.description}</p>
+            <p className="text-gray-600 dark:text-gray-500 mt-2">
+              {step.description}
+            </p>
           </div>
         ))}
       </div>

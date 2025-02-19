@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import { useNavigate } from "react-router";
 import addPost from "/public/add.png";
-import Heading from "../../components/sectionHeading/Heading";
+import SectionHeading from "../../components/SectionHeading";
 
 const categories = [
   "Pets",
@@ -50,13 +50,13 @@ export default function AddItem() {
   const [LostOrFoundDate, setLostOrFoundDate] = useState(new Date());
   const { register, handleSubmit, reset } = useForm();
   const { user } = useAuth();
-  const [email, setEmail] = useState(user?.email);
-  const [name, setName] = useState(user?.displayName);
   const instance = useAxiosInstance();
   const navigate = useNavigate();
 
   const handleAddItems = async (formData) => {
     formData.date = LostOrFoundDate.toISOString().slice(0, 10);
+    formData.name = user.displayName;
+    formData.email = user.email;
     try {
       await instance.post(`/posts`, formData);
       reset();
@@ -68,24 +68,21 @@ export default function AddItem() {
   };
 
   return (
-    <div className="mt-28 mx-auto max-w-7xl lg:px-9 md:px-5 px-3 text-gray-900 dark:text-white">
+    <div className="mx-auto max-w-7xl lg:px-9 md:px-5 px-3 text-gray-900 dark:text-white/90 ">
       <Helmet>
         <title>Add New Post</title>
       </Helmet>
       <div>
-        <Heading>Post for Lost or Found Item</Heading>
-        <p className="mb-7 -mt-4 font-medium text-sm">
-          Provide details to help identify the lost or found item.
-        </p>
+        <SectionHeading>Post for Lost or Found Item</SectionHeading>
       </div>
 
-      <div className="mb-16 flex lg:gap-24 gap-14 lg:flex-row flex-col">
+      <div className="mb-16 flex lg:gap-24 gap-14 lg:flex-row flex-col ">
         <form
           onSubmit={handleSubmit(handleAddItems)}
-          className="space-y-4 w-full bg-gray-100 dark:bg-gray-900 p-6 rounded-lg shadow-md"
+          className="space-y-4 w-full bg-[#00336618] dark:bg-gray-900/50 p-6 rounded-md shadow-md "
         >
           <div>
-            <label className="block font-bold text-lg mb-1" htmlFor="title">
+            <label className="block font-bold  mb-1" htmlFor="title">
               Title
             </label>
             <input
@@ -93,19 +90,19 @@ export default function AddItem() {
               {...register("title")}
               type="text"
               required
-              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
+              className="w-full border  dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none  "
             />
           </div>
 
           <div>
-            <label className="block font-bold text-lg mb-1" htmlFor="post-type">
+            <label className="block font-bold mb-1" htmlFor="post-type">
               Post Type
             </label>
             <select
               {...register("postType")}
               id="post-type"
               required
-              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
+              className="w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
             >
               <option disabled>Select Post Type</option>
               <option value="lost">Lost</option>
@@ -114,7 +111,7 @@ export default function AddItem() {
           </div>
 
           <div>
-            <label className="block font-bold text-lg mb-1" htmlFor="thumbnail">
+            <label className="block font-bold mb-1" htmlFor="thumbnail">
               Thumbnail (Image URL)
             </label>
             <input
@@ -122,34 +119,31 @@ export default function AddItem() {
               {...register("thumbnail")}
               type="text"
               required
-              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
+              className="w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
             />
           </div>
 
           <div>
-            <label
-              className="block font-bold text-lg mb-1"
-              htmlFor="description"
-            >
+            <label className="block font-bold mb-1" htmlFor="description">
               Description
             </label>
             <textarea
               id="description"
               {...register("description")}
               required
-              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
+              className="w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
               rows="4"
             ></textarea>
           </div>
 
           <div>
-            <label className="block font-bold text-lg mb-1" htmlFor="category">
+            <label className="block font-bold  mb-1" htmlFor="category">
               Category
             </label>
             <select
               id="category"
               {...register("category")}
-              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
+              className="w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
             >
               <option value="" disabled>
                 Select Category
@@ -171,7 +165,7 @@ export default function AddItem() {
               {...register("location")}
               type="text"
               required
-              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
+              className="w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
             />
           </div>
 
@@ -182,11 +176,13 @@ export default function AddItem() {
             <DatePicker
               selected={LostOrFoundDate}
               onChange={setLostOrFoundDate}
-              className="w-full border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-sm p-2 focus:ring focus:ring-blue-500 outline-none"
+              className="w-full border dark:border-gray-700/40 dark:bg-gray-900  dark:text-white rounded-sm p-2 focus:ring-1 focus:border-[#003366] outline-none"
             />
           </div>
 
-          <Button1 className="w-full">Add Post</Button1>
+          <Button1 className="w-full bg-[#003366] text-white hover:bg-[#1a4979]">
+            Add Post
+          </Button1>
         </form>
 
         <img

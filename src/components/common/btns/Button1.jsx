@@ -5,8 +5,8 @@ import "./anim.css";
 export default function Button1({ children, className, onClick = () => {} }) {
   return (
     <button
-      className={`py-2 px-3  text-white rounded-md hover:bg-black transition-all duration-300 
-         ${className} bg-[#cc0000]`}
+      className={`py-2 px-3   rounded-md  transition-all duration-300 
+         ${className} `}
       onClick={onClick}
     >
       {children}

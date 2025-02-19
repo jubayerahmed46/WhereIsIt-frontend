@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Button1 from "../../components/common/btns/Button1";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Spinner from "../spinner/Spinner";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
+import Spinner2 from "../spinner/Spinner2";
+import SectionHeading from "../../components/SectionHeading";
 
 function AllRecoveredPage() {
   const { user } = useAuth();
@@ -12,6 +14,7 @@ function AllRecoveredPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [loader, setLoader] = useState(true);
   const instance = useAxiosInstance();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -31,63 +34,71 @@ function AllRecoveredPage() {
   }, [user, instance]);
 
   if (loader) {
-    return <Spinner />;
+    return <Spinner2 />;
   }
 
   return (
-    <div className="overflow-x-auto md:mt-28 mt-24 text-gray-900 dark:text-white max-w-7xl mx-auto p-3">
+    <div className="overflow-x-auto dark:text-white/90 max-w-7xl mx-auto  lg:px-9 md:px-5 px-3 ">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Recovered Posts</title>
       </Helmet>
+      <div>
+        <SectionHeading>My Recovered Items</SectionHeading>
+      </div>
       {errorMessage ? (
-        <main className="grid min-h-full place-items-center bg-white dark:bg-gray-900 px-6 py-24 sm:py-32 lg:px-8">
+        <div className="grid min-h-full place-items-center bg-gray-100 dark:bg-gray-900 px-6 py-24 sm:py-32 lg:px-8 ">
           <div className="text-center">
             <h1 className="mt-4 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
               {errorMessage}
             </h1>
             <p className="mt-6 text-lg font-medium text-gray-500 dark:text-gray-400 sm:text-xl">
-              d You don't have any recovered items.
+              You don't have any recovered items.
             </p>
           </div>
-        </main>
+        </div>
       ) : (
-        <table className="table w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-md rounded-lg">
-          {/* head */}
-          <thead className="bg-gray-100 dark:bg-gray-800">
-            <tr>
-              <th className="px-4 py-2">#</th>
-              <th className="px-4 py-2">Title</th>
-              <th className="px-4 py-2">Description and Location</th>
-              <th className="px-4 py-2">Category</th>
-              <th className="px-4 py-2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {recoverdPost?.map((post, serial) => (
-              <tr key={post._id} className="border-b dark:border-gray-700">
-                <td className="px-4 py-2">{serial + 1}</td>
-                <td className="px-4 py-2">
-                  <h2 className="font-bold">{post.title.slice(0, 20)}...</h2>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Date: {post.date}
-                  </p>
-                </td>
-                <td className="px-4 py-2">
-                  <h4>{post.description.slice(0, 40)}...</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {post.location}
-                  </p>
-                </td>
-                <td className="px-4 py-2">
-                  <Link to={`/posts/${post._id}`}>
-                    <Button1 className={"text-white"}>Details</Button1>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse border border-gray-700   dark:border-gray-700/70 dark:shadow-gray-900">
+              <thead className="border-b border-gray-700 dark:border-gray-700/70 dark:shadow-gray-900 md:text-base text-xs">
+                <tr>
+                  <th className="p-4">Thumbnail</th>
+                  <th className=" p-4">Title and Desc</th>
+                  <th className=" p-4">Location</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recoverdPost.map((post) => (
+                  <tr
+                    onClick={() => navigate(`/postsDetails/${post._id}`)}
+                    key={post._id}
+                    className="cursor-pointer border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800/20 border-b dark:border-gray-700/70 dark:shadow-gray-900"
+                  >
+                    <td className="p-4">
+                      <img
+                        src={post.thumbnail}
+                        alt={post.title}
+                        className="w-16 h-16 rounded-lg object-cover"
+                      />
+                    </td>
+                    <td className="p-4 md:text-lg  text-sm">
+                      <span className="block font-semibold">
+                        {post.title.slice(0, 20)}...
+                      </span>
+                      <span className="md:text-sm text-xs text-gray-500 ">
+                        {post.description.slice(0, 40)}
+                      </span>
+                    </td>
+                    <td className="p-4 md:text-sm text-[9px] md:text-left text-center">
+                      {post.location}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
     </div>
   );
