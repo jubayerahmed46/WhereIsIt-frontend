@@ -138,15 +138,4 @@ npm install
 npm run dev
 ```
 
-### Changes Made:
-- **Image**: The screenshot is now at the top of the README.
-- **Project Overview**: A clear description of the project.
-- **Live Site URLs**: Added links to the live versions.
-- **Key Features**: Comprehensive list of features with clear sections.
-- **Tech Stack**: Categorized the technologies used for both frontend and backend.
-- **Repositories**: Added links to both backend and frontend repositories.
-- **Run Locally**: Provided a step-by-step guide to run the project locally.
-- **Additional Info**: Included the requirement document link and assignment category.
-
-Let me know if you need further modifications!
 
